@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="STAGE"
+  DTS:DTSID="{015cfda7-dc4a-4a83-95f0-f777cf3829c1}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=t-sds-qap-sql.umwerk.net;User ID=dbadmin;Initial Catalog=t-sds-qap-mssql;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASFudscpOAEGIb0RP6YF5KgAAAAACAAAAAAADZgAAwAAAABAAAABX35tJ9nNk71UBjJM9RrQXAAAAAASAAACgAAAAEAAAACdBOlc1ZD+AiKrmRLqn7ap4AAAAQr4tnJvWNB2UfSYoMwAwL/vZoPGCMm/Sz1HALeLUWFhfZg0l84oWpJdS27BG1Q/M5dcaCMru0zxjhcs6Zq8doewg+CtWnGY7bZkpWfltdTqTLgSgTFIM6Ai4brahGkhMMi/QdZApnMEMmLMEQEc1/cQ9M3y/bPdfFAAAAH7QGSNe6wDBoavol2Rf4CIXCVrB</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,828 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/6/2018 4:00:34 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ITECNP-PAG"
+  DTS:CreatorName="INFORMATEC\pag"
+  DTS:DTSID="{461CB80C-11A0-4896-BFAF-ECC8D9F1EF9A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.106"
+  DTS:LocaleID="2055"
+  DTS:ObjectName="PR_01_Meta_Data"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{3D425F9D-8289-48AD-A3C4-70D63901D889}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\META_PROCESS_CYCLE"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Datenflusstask"
+      DTS:DTSID="{A16C2D96-F5F7-4394-981B-263D7B2C0181}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="META_PROCESS_CYCLE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+              description="OLE DB-Ziel"
+              name="META_PROCESS_CYCLE"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset">[dbo].[META_PROCESS_CYCLE]</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Connections[OleDbConnection]"
+                  connectionManagerID="{0871f5b6-ff6d-43e2-946e-7ec9d210179b}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB00]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels]"
+                  errorOrTruncationOperation="Einfügen"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Eingabe des OLE DB-Ziels">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].Columns[PRC_MAX_ID]"
+                      cachedDataType="i4"
+                      cachedName="PRC_MAX_ID"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_MAX_ID]"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]" />
+                    <inputColumn
+                      refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].Columns[PRC_DATETIME]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="PRC_DATETIME"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_DATETIME]"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[ID_META_PROCESS_CYCLE]"
+                      dataType="i4"
+                      name="ID_META_PROCESS_CYCLE" />
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_MAX_ID]"
+                      dataType="i4"
+                      name="PRC_MAX_ID" />
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      name="PRC_DATETIME" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Fehlerausgabe des OLE DB-Ziels"
+                  synchronousInputId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+              description="OLE DB-Quelle"
+              name="OLE DB-Quelle"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT MAX(ID)  AS PRC_MAX_ID,
+ GETDATE() AS PRC_DATETIME
+  FROM [t-sds-qap-mssql].[dbo].[Facts_600sec]</property>
+                <property
+                  dataType="System.String"
+                  description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Connections[OleDbConnection]"
+                  connectionManagerID="{015cfda7-dc4a-4a83-95f0-f777cf3829c1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[STAGE]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                  name="Ausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_MAX_ID]"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      name="PRC_MAX_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_DATETIME]"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      name="PRC_DATETIME"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_MAX_ID]"
+                      dataType="i4"
+                      name="PRC_MAX_ID" />
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      name="PRC_DATETIME" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                  isErrorOut="true"
+                  name="Fehlerausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      name="PRC_MAX_ID" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      name="PRC_DATETIME" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\META_PROCESS_CYCLE.Paths[Ausgabe der OLE DB-Quelle]"
+              endId="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels]"
+              name="Ausgabe der OLE DB-Quelle"
+              startId="Package\META_PROCESS_CYCLE\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\META_PROCESS_CYCLE_SNAP"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Datenflusstask"
+      DTS:DTSID="{4f612e1f-6240-45bf-adb6-c4fe331d1c39}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="META_PROCESS_CYCLE_SNAP"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+              description="OLE DB-Ziel"
+              name="META_PROCESS_CYCLE"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset">[dbo].[META_PROCESS_CYCLE_SNAP]</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Connections[OleDbConnection]"
+                  connectionManagerID="{0871f5b6-ff6d-43e2-946e-7ec9d210179b}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB00]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels]"
+                  errorOrTruncationOperation="Einfügen"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Eingabe des OLE DB-Ziels">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].Columns[PRC_MAX_ID]"
+                      cachedDataType="i4"
+                      cachedName="PRC_MAX_ID"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_MAX_ID]"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]" />
+                    <inputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].Columns[PRC_DATETIME]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="PRC_DATETIME"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_DATETIME]"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]" />
+                    <inputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].Columns[ID_META_PROCESS_CYCLE]"
+                      cachedDataType="i4"
+                      cachedName="ID_META_PROCESS_CYCLE"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[ID_META_PROCESS_CYCLE]"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[ID_META_PROCESS_CYCLE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[ID_META_PROCESS_CYCLE]"
+                      dataType="i4"
+                      name="ID_META_PROCESS_CYCLE" />
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_MAX_ID]"
+                      dataType="i4"
+                      name="PRC_MAX_ID" />
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      name="PRC_DATETIME" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Fehlerausgabe des OLE DB-Ziels"
+                  synchronousInputId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+              description="OLE DB-Quelle"
+              name="OLE DB-Quelle"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP (1000) [ID_META_PROCESS_CYCLE]
+      ,[PRC_MAX_ID]
+      ,[PRC_DATETIME]
+  FROM [T-SDS-DB00].[dbo].[META_PROCESS_CYCLE]
+  WHERE [ID_META_PROCESS_CYCLE] = (SELECT MAX([ID_META_PROCESS_CYCLE])   FROM [T-SDS-DB00].[dbo].[META_PROCESS_CYCLE])</property>
+                <property
+                  dataType="System.String"
+                  description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Connections[OleDbConnection]"
+                  connectionManagerID="{015cfda7-dc4a-4a83-95f0-f777cf3829c1}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[STAGE]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                  name="Ausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_MAX_ID]"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      name="PRC_MAX_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_DATETIME]"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      name="PRC_DATETIME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[ID_META_PROCESS_CYCLE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[ID_META_PROCESS_CYCLE]"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[ID_META_PROCESS_CYCLE]"
+                      name="ID_META_PROCESS_CYCLE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_MAX_ID]"
+                      dataType="i4"
+                      name="PRC_MAX_ID" />
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      name="PRC_DATETIME" />
+                    <externalMetadataColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[ID_META_PROCESS_CYCLE]"
+                      dataType="i4"
+                      name="ID_META_PROCESS_CYCLE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                  isErrorOut="true"
+                  name="Fehlerausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ID_META_PROCESS_CYCLE]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ID_META_PROCESS_CYCLE]"
+                      name="ID_META_PROCESS_CYCLE" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_MAX_ID]"
+                      name="PRC_MAX_ID" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[PRC_DATETIME]"
+                      name="PRC_DATETIME" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\META_PROCESS_CYCLE_SNAP.Paths[Ausgabe der OLE DB-Quelle]"
+              endId="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE.Inputs[Eingabe des OLE DB-Ziels]"
+              name="Ausgabe der OLE DB-Quelle"
+              startId="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE META_PROCESS_CYCLE_SNAP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Task &quot;SQL ausführen&quot;"
+      DTS:DTSID="{B418532C-3090-4A47-A60A-727859F2EF7E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE META_PROCESS_CYCLE_SNAP"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0871f5b6-ff6d-43e2-946e-7ec9d210179b}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE META_PROCESS_CYCLE_SNAP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Einschränkung]"
+      DTS:CreationName=""
+      DTS:DTSID="{871658FC-11B8-48E0-B64D-A029FB8FE78A}"
+      DTS:From="Package\META_PROCESS_CYCLE"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Einschränkung"
+      DTS:To="Package\TRUNCATE META_PROCESS_CYCLE_SNAP" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Einschränkung 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{748E8001-6712-4EB9-A02D-D64D9A60ACA9}"
+      DTS:From="Package\TRUNCATE META_PROCESS_CYCLE_SNAP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Einschränkung 1"
+      DTS:To="Package\META_PROCESS_CYCLE_SNAP" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Dieser CDATA-Abschnitt enthält die Layoutinformationen des Pakets, z.B. Informationen wie X-/Y-Koordinaten, Breite und Höhe.-->
+<!--Wenn Sie diesen Abschnitt manuell ändern und Ihnen ein Fehler unterläuft, können Sie ihn löschen. -->
+<!--Das Paket kann zwar weiterhin normal geladen werden, aber frühere Layoutinformationen gehen verloren, und die Elemente auf der Entwurfsoberfläche werden vom Designer automatisch neu angeordnet.-->
+<Objects
+  Version="8">
+  <!--Jeder darunter liegende Knoten enthält Eigenschaften, die sich nicht auf das Laufzeitverhalten auswirken.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="311,42"
+          Id="Package\META_PROCESS_CYCLE"
+          TopLeft="63,55" />
+        <NodeLayout
+          Size="311,42"
+          Id="Package\META_PROCESS_CYCLE_SNAP"
+          TopLeft="63,262" />
+        <NodeLayout
+          Size="311,42"
+          Id="Package\TRUNCATE META_PROCESS_CYCLE_SNAP"
+          TopLeft="63,156.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Einschränkung]"
+          TopLeft="218.5,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.5"
+              Start="0,0"
+              End="0,52">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Einschränkung 1]"
+          TopLeft="218.5,198.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.5"
+              Start="0,0"
+              End="0,56">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\META_PROCESS_CYCLE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\META_PROCESS_CYCLE\OLE DB-Quelle"
+          TopLeft="94,78" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE"
+          TopLeft="73,223" />
+        <EdgeLayout
+          Id="Package\META_PROCESS_CYCLE.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="175.25,120">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,103"
+              Start="0,0"
+              End="0,95.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,95.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\META_PROCESS_CYCLE\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\META_PROCESS_CYCLE\META_PROCESS_CYCLE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\META_PROCESS_CYCLE_SNAP">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="212,42"
+          Id="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle"
+          TopLeft="73,78" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE"
+          TopLeft="73,223" />
+        <EdgeLayout
+          Id="Package\META_PROCESS_CYCLE_SNAP.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="179,120">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,103"
+              Start="0,0"
+              End="0,95.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,95.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\META_PROCESS_CYCLE_SNAP\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\META_PROCESS_CYCLE_SNAP\META_PROCESS_CYCLE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DB02"
+  DTS:DTSID="{79D8C7AD-BAC3-42E8-86F0-E474DE89B82E}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=t-sds-qap-sql.umwerk.net;User ID=dbadmin;Initial Catalog=T-SDS-DB02;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASFudscpOAEGIb0RP6YF5KgAAAAACAAAAAAADZgAAwAAAABAAAAANwD6/quxAzHIDask0iSZ+AAAAAASAAACgAAAAEAAAAJeRN2EMeCpbQJ8iaSoZjld4AAAAYvFZ/KopRL79qhMcAjGeXrPt+qRgXXn0enovSwuCrjWsekBltGaCRLnAy1qrdJhzY/plmq03pZ8CfI6SvVN5G2e8rfEXa0YDy8xXlV/QBAoX22XPCp/8Z+TE/kpBxYil8hp8Lec35KHrqdHaWAwVjwLcw2iIWOtnFAAAAN10Ndc9Gj+AKJ/NoAPhWKm4uXND</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,586 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/7/2018 6:24:50 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ITECNP-PAG"
+  DTS:CreatorName="INFORMATEC\pag"
+  DTS:DTSID="{094E17F9-9024-4CDB-8FE0-A081ACD8A158}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.106"
+  DTS:LocaleID="2055"
+  DTS:ObjectName="PR_03_02_Direct_Access"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{5EE1C117-FF3E-46A0-A4D1-6A87D2FD40A8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\TOTAL"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Datenflusstask"
+      DTS:DTSID="{41ACABDE-57D6-4D77-923B-00526C90A9C2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TOTAL"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\TOTAL\OLE DB-Quelle"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+              description="OLE DB-Quelle"
+              name="OLE DB-Quelle"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset">[dbo].[Facts_600sec_Delta]</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+   [time_stamp] AS UNIX_TS
+      ,SUM([actual_power_kw]) AS [actual_power_kw]
+	  ,SUM([theoretical_power]) AS [theoretical_power]
+	  ,SUM([actual_power_kw]) - SUM([theoretical_power]) AS [actual_power_loss]
+	  ,SUM([revenues]) AS [revenues]
+	  ,SUM([revenues_losses]) AS [revenues_losses]
+	  ,SUM([tot_co2_avoided]) AS [tot_co2_avoided]
+  FROM [T-SDS-DB01].[dbo].[Facts_600sec_Delta]
+  GROUP BY [time_stamp]</property>
+                <property
+                  dataType="System.String"
+                  description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TOTAL\OLE DB-Quelle.Connections[OleDbConnection]"
+                  connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                  name="Ausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_kw]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                      name="actual_power_kw"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues]"
+                      name="revenues"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues_losses]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                      name="revenues_losses"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[theoretical_power]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[theoretical_power]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[theoretical_power]"
+                      name="theoretical_power"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[tot_co2_avoided]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[tot_co2_avoided]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[tot_co2_avoided]"
+                      name="tot_co2_avoided"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_loss]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                      name="actual_power_loss"
+                      precision="38"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                      name="UNIX_TS"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_kw]"
+                      dataType="numeric"
+                      name="actual_power_kw"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues]"
+                      dataType="numeric"
+                      name="revenues"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues_losses]"
+                      dataType="numeric"
+                      name="revenues_losses"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[theoretical_power]"
+                      dataType="numeric"
+                      name="theoretical_power"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[tot_co2_avoided]"
+                      dataType="numeric"
+                      name="tot_co2_avoided"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_loss]"
+                      dataType="numeric"
+                      name="actual_power_loss"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                      dataType="i8"
+                      name="UNIX_TS" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                  isErrorOut="true"
+                  name="Fehlerausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                      dataType="i8"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                      name="UNIX_TS" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                      dataType="numeric"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                      name="actual_power_kw"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues]"
+                      dataType="numeric"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues]"
+                      name="revenues"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                      dataType="numeric"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                      name="actual_power_loss"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                      dataType="numeric"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                      name="revenues_losses"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[theoretical_power]"
+                      dataType="numeric"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[theoretical_power]"
+                      name="theoretical_power"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[tot_co2_avoided]"
+                      dataType="numeric"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[tot_co2_avoided]"
+                      name="tot_co2_avoided"
+                      precision="38"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\TOTAL\OLE DB-Ziel"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+              description="OLE DB-Ziel"
+              name="OLE DB-Ziel"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset">[dbo].[T_TOTAL_KPIS]</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TOTAL\OLE DB-Ziel.Connections[OleDbConnection]"
+                  connectionManagerID="{3b228717-13f4-46e7-9cab-dba99d98c8f9}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB03]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  errorOrTruncationOperation="Einfügen"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Eingabe des OLE DB-Ziels">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[actual_power_kw]"
+                      cachedDataType="numeric"
+                      cachedName="actual_power_kw"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_kw]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]" />
+                    <inputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[revenues]"
+                      cachedDataType="numeric"
+                      cachedName="revenues"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues]" />
+                    <inputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[revenues_losses]"
+                      cachedDataType="numeric"
+                      cachedName="revenues_losses"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues_losses]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]" />
+                    <inputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[theoretical_power]"
+                      cachedDataType="numeric"
+                      cachedName="theoretical_power"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[theoretical_power]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[theoretical_power]" />
+                    <inputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[tot_co2_avoided]"
+                      cachedDataType="numeric"
+                      cachedName="tot_co2_avoided"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[tot_co2_avoided]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[tot_co2_avoided]" />
+                    <inputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[actual_power_loss]"
+                      cachedDataType="numeric"
+                      cachedName="actual_power_loss"
+                      cachedPrecision="38"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_loss]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]" />
+                    <inputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[UNIX_TS]"
+                      cachedDataType="i8"
+                      cachedName="UNIX_TS"
+                      externalMetadataColumnId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                      lineageId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_kw]"
+                      dataType="numeric"
+                      name="actual_power_kw"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues]"
+                      dataType="numeric"
+                      name="revenues"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues_losses]"
+                      dataType="numeric"
+                      name="revenues_losses"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[theoretical_power]"
+                      dataType="numeric"
+                      name="theoretical_power"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[tot_co2_avoided]"
+                      dataType="numeric"
+                      name="tot_co2_avoided"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_loss]"
+                      dataType="numeric"
+                      name="actual_power_loss"
+                      precision="38"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                      dataType="i8"
+                      name="UNIX_TS" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\TOTAL\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Fehlerausgabe des OLE DB-Ziels"
+                  synchronousInputId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\TOTAL\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\TOTAL\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\TOTAL\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\TOTAL.Paths[Ausgabe der OLE DB-Quelle]"
+              endId="Package\TOTAL\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+              name="Ausgabe der OLE DB-Quelle"
+              startId="Package\TOTAL\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Dieser CDATA-Abschnitt enthält die Layoutinformationen des Pakets, z.B. Informationen wie X-/Y-Koordinaten, Breite und Höhe.-->
+<!--Wenn Sie diesen Abschnitt manuell ändern und Ihnen ein Fehler unterläuft, können Sie ihn löschen. -->
+<!--Das Paket kann zwar weiterhin normal geladen werden, aber frühere Layoutinformationen gehen verloren, und die Elemente auf der Entwurfsoberfläche werden vom Designer automatisch neu angeordnet.-->
+<Objects
+  Version="8">
+  <!--Jeder darunter liegende Knoten enthält Eigenschaften, die sich nicht auf das Laufzeitverhalten auswirken.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="114,42"
+          Id="Package\TOTAL"
+          TopLeft="95,133" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\TOTAL">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\TOTAL\OLE DB-Quelle"
+          TopLeft="278,85" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\TOTAL\OLE DB-Ziel"
+          TopLeft="286,362" />
+        <EdgeLayout
+          Id="Package\TOTAL.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="356,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,235"
+              Start="0,0"
+              End="0,227.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,227.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\TOTAL\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\TOTAL\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
