@@ -8,7 +8,7 @@
       DTS:ConnectionString="Data Source=t-sds-qap-sql.umwerk.net;User ID=dbadmin;Initial Catalog=T-SDS-DB02;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
       <DTS:Password
         DTS:Name="Password"
-        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASFudscpOAEGIb0RP6YF5KgAAAAACAAAAAAADZgAAwAAAABAAAAANwD6/quxAzHIDask0iSZ+AAAAAASAAACgAAAAEAAAAJeRN2EMeCpbQJ8iaSoZjld4AAAAYvFZ/KopRL79qhMcAjGeXrPt+qRgXXn0enovSwuCrjWsekBltGaCRLnAy1qrdJhzY/plmq03pZ8CfI6SvVN5G2e8rfEXa0YDy8xXlV/QBAoX22XPCp/8Z+TE/kpBxYil8hp8Lec35KHrqdHaWAwVjwLcw2iIWOtnFAAAAN10Ndc9Gj+AKJ/NoAPhWKm4uXND</DTS:Password>
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASFudscpOAEGIb0RP6YF5KgAAAAACAAAAAAADZgAAwAAAABAAAABoC0NkkmqdyxSWQI72OJpUAAAAAASAAACgAAAAEAAAACW6g1kZ0fYOYyMD8rYRRBN4AAAA1nA9gVvjrYeeD5ruRB03zfdssTUp4KPlOkc5qtXt1XDqsj7GAsMW2szNISMz9YZjQNx6qVvnDrPacpmTC9oUuDXLhm4xmBgU4DwLdT3TUj/kZM2/kDPJOe0TgogIySeAJmAo67ix/yxyrYmRg/kzhGlMJV1HtQ+PFAAAAH7s1lUpQTlrfGggsh7HbVZJX0Uw</DTS:Password>
     </DTS:ConnectionManager>
   </DTS:ObjectData>
 </DTS:ConnectionManager>

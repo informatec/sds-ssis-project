@@ -11,8 +11,8 @@
   DTS:LocaleID="2055"
   DTS:ObjectName="PR_01_Meta_Data"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{3D425F9D-8289-48AD-A3C4-70D63901D889}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{00140F5B-48ED-433B-90AA-5BA304A064A6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -650,7 +650,7 @@
         <NodeLayout
           Size="311,42"
           Id="Package\META_PROCESS_CYCLE"
-          TopLeft="63,55" />
+          TopLeft="63,54" />
         <NodeLayout
           Size="311,42"
           Id="Package\META_PROCESS_CYCLE_SNAP"
@@ -661,18 +661,18 @@
           TopLeft="63,156.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung]"
-          TopLeft="218.5,97">
+          TopLeft="218.5,96">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.5"
+              EndConnector="0,60.5"
               Start="0,0"
-              End="0,52">
+              End="0,53">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52" />
+                    End="0,53" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
