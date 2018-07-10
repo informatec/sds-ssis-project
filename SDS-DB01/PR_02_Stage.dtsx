@@ -11,16 +11,1752 @@
   DTS:LocaleID="2055"
   DTS:ObjectName="PR_02_Stage"
   DTS:PackageType="5"
-  DTS:VersionBuild="42"
-  DTS:VersionGUID="{FA3BB0B2-711F-4FE3-81F2-5ACE93673F76}">
+  DTS:VersionBuild="48"
+  DTS:VersionGUID="{4619070B-B7A3-486B-9637-60BDABAD1222}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
+      DTS:refId="Package\Datenflusstask"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Datenflusstask"
+      DTS:Disabled="True"
+      DTS:DTSID="{F16EB76B-FEC2-49BB-B14F-ADE148362555}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Datenflusstask"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Datenflusstask\Bedingtes Teilen"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Bedingtes Teilen;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;0"
+              description="Leitet Datenzeilen je nach Inhalt der Daten an verschiedene Ausgaben weiter. Geben Sie mithilfe von Bedingungen (SSIS-Ausdrücken) an, welche Zeilen weitergeleitet werden. Trennen Sie beispielsweise Datensätze, die bereinigt werden müssen, von Datensätzen, die bereit zum Laden sind, oder leiten Sie nur eine Teilmenge der Datensätze weiter."
+              name="Bedingtes Teilen"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Datenflusstask\Bedingtes Teilen.Inputs[Eingabe für bedingtes Teilen]"
+                  description="Transformation für Eingabe für bedingtes Teilen"
+                  name="Eingabe für bedingtes Teilen">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Bedingtes Teilen.Inputs[Eingabe für bedingtes Teilen].Columns[temp]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="temp"
+                      lineageId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[temp]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Fall 1]"
+                  description="Ausgabe &quot;1&quot; der Transformation für bedingtes Teilen"
+                  errorOrTruncationOperation="Berechnung"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Fall 1"
+                  synchronousInputId="Package\Datenflusstask\Bedingtes Teilen.Inputs[Eingabe für bedingtes Teilen]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Gibt den Ausdruck an. Die Version des Ausdrucks verwendet Herkunftsbezeichner anstelle von Spaltennamen."
+                      name="Expression">![ISNULL](#{Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[temp]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Gibt die angezeigte Version des Ausdrucks an. Die Version des Ausdrucks verwendet Spaltennamen."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(temp)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die Position der Bedingung in der Liste der von der Transformation ausgewerteten Bedingungen an. Werte werden aufsteigend vom niedrigsten zum höchsten ausgewertet."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Standardausgabe für bedingtes Teilen]"
+                  description="Transformation für Standardausgabe für bedingtes Teilen"
+                  exclusionGroup="1"
+                  name="Standardausgabe für bedingtes Teilen"
+                  synchronousInputId="Package\Datenflusstask\Bedingtes Teilen.Inputs[Eingabe für bedingtes Teilen]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Fehlerausgabe für bedingtes Teilen]"
+                  description="Transformation für Fehlerausgabe für bedingtes Teilen"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Fehlerausgabe für bedingtes Teilen"
+                  synchronousInputId="Package\Datenflusstask\Bedingtes Teilen.Inputs[Eingabe für bedingtes Teilen]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Fehlerausgabe für bedingtes Teilen].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Fehlerausgabe für bedingtes Teilen].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Fehlerausgabe für bedingtes Teilen].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Fehlerausgabe für bedingtes Teilen].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Datenflusstask\Entpivotieren"
+              componentClassID="Microsoft.UnPivot"
+              contactInfo="Entpivotieren;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;0"
+              description="Erweitert einen nicht normalisierten Datenfluss in eine stärker normalisierte Version. Werte aus mehreren Spalten eines einzelnen Datensatzes werden in mehrere Datensätze in einer einzelnen Spalte erweitert. Erweitern Sie beispielsweise eine Tabelle, in der Sportergebnisse aufgelistet sind, um eine Spalte für jedes Spiel. So erhalten Sie mehr Datensätze und eine konsolidierte Ergebnisspalte."
+              name="Entpivotieren">
+              <inputs>
+                <input
+                  refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren]"
+                  hasSideEffects="true"
+                  name="Eingabe entpivotieren">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_air_w_in]"
+                      cachedDataType="numeric"
+                      cachedName="temp_air_w_in"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_air_w_in]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_air_w_in</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_air_w_out]"
+                      cachedDataType="numeric"
+                      cachedName="temp_air_w_out"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_air_w_out]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_air_w_out</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_bearing_1]"
+                      cachedDataType="numeric"
+                      cachedName="temp_bearing_1"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_bearing_1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_bearing_1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_bearing_2]"
+                      cachedDataType="numeric"
+                      cachedName="temp_bearing_2"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_bearing_2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_bearing_2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_converter]"
+                      cachedDataType="numeric"
+                      cachedName="temp_converter"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_converter</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_converter_coil]"
+                      cachedDataType="numeric"
+                      cachedName="temp_converter_coil"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter_coil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_converter_coil</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_converter_water]"
+                      cachedDataType="numeric"
+                      cachedName="temp_converter_water"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter_water]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_converter_water</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_gearbox_bearing_1]"
+                      cachedDataType="numeric"
+                      cachedName="temp_gearbox_bearing_1"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_gearbox_bearing_1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_gearbox_bearing_2]"
+                      cachedDataType="numeric"
+                      cachedName="temp_gearbox_bearing_2"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_gearbox_bearing_2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_gearbox_bearing_3]"
+                      cachedDataType="numeric"
+                      cachedName="temp_gearbox_bearing_3"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_3]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_gearbox_bearing_3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_gearbox_oil]"
+                      cachedDataType="numeric"
+                      cachedName="temp_gearbox_oil"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_oil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_gearbox_oil</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_gen_rotor]"
+                      cachedDataType="numeric"
+                      cachedName="temp_gen_rotor"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gen_rotor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_gen_rotor</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_gen_stator]"
+                      cachedDataType="numeric"
+                      cachedName="temp_gen_stator"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gen_stator]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_gen_stator</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_in_nacelle]"
+                      cachedDataType="numeric"
+                      cachedName="temp_in_nacelle"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_in_nacelle]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_in_nacelle</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_in_nacelle_cabinet]"
+                      cachedDataType="numeric"
+                      cachedName="temp_in_nacelle_cabinet"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_in_nacelle_cabinet]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_in_nacelle_cabinet</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_oil]"
+                      cachedDataType="numeric"
+                      cachedName="temp_oil"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_oil]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_oil</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_phase_1]"
+                      cachedDataType="numeric"
+                      cachedName="temp_phase_1"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_phase_1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_phase_2]"
+                      cachedDataType="numeric"
+                      cachedName="temp_phase_2"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_phase_2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_phase_3]"
+                      cachedDataType="numeric"
+                      cachedName="temp_phase_3"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_3]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_phase_3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_ring_1]"
+                      cachedDataType="numeric"
+                      cachedName="temp_ring_1"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_ring_1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_ring_1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_ring_2]"
+                      cachedDataType="numeric"
+                      cachedName="temp_ring_2"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_ring_2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_ring_2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_rotor_hub]"
+                      cachedDataType="numeric"
+                      cachedName="temp_rotor_hub"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_rotor_hub]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_rotor_hub</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_rotor_hub_cabinet]"
+                      cachedDataType="numeric"
+                      cachedName="temp_rotor_hub_cabinet"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_rotor_hub_cabinet]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_rotor_hub_cabinet</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_shaft_bearing_1]"
+                      cachedDataType="numeric"
+                      cachedName="temp_shaft_bearing_1"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_shaft_bearing_1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_shaft_bearing_2]"
+                      cachedDataType="numeric"
+                      cachedName="temp_shaft_bearing_2"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_shaft_bearing_2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_trf_phase_1]"
+                      cachedDataType="numeric"
+                      cachedName="temp_trf_phase_1"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_1]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_trf_phase_1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_trf_phase_2]"
+                      cachedDataType="numeric"
+                      cachedName="temp_trf_phase_2"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_2]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_trf_phase_2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_trf_phase_3]"
+                      cachedDataType="numeric"
+                      cachedName="temp_trf_phase_3"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_3]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_trf_phase_3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[temp_yaw_motor]"
+                      cachedDataType="numeric"
+                      cachedName="temp_yaw_motor"
+                      cachedPrecision="20"
+                      cachedScale="2"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_yaw_motor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\-1:invalid}</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue">temp_yaw_motor</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren].Columns[turbine_serial]"
+                      cachedDataType="i4"
+                      cachedName="turbine_serial"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[turbine_serial]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Die Herkunfts-ID der Ausgabespalte, die den Wert dieser Eingabespalte empfängt. Oder &quot;-1&quot;, wenn der Wert der Spalte nicht in Ausgabezeilen verwendet wird."
+                          name="DestinationColumn">#{Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[turbine_serial]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Gibt den Wert an, der in die PivotKey-Spalte in der Ausgabezeile geschrieben wird."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren]"
+                  name="Ausgabe entpivotieren">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[temp]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[temp]"
+                      name="temp">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob der Wert in der PivotKeyValue-Eigenschaft in die Spalte in der neuen Zeile geschrieben wird."
+                          name="PivotKey">true</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[turbine_serial]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[turbine_serial]"
+                      name="turbine_serial">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob der Wert in der PivotKeyValue-Eigenschaft in die Spalte in der neuen Zeile geschrieben wird."
+                          name="PivotKey">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Datenflusstask\OLE DB-Quelle"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+              description="OLE DB-Quelle"
+              name="OLE DB-Quelle"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT distinct
+
+ [turbine_serial]          
+,max([temp_air_w_in]          ) over ( partition by turbine_serial ) as [temp_air_w_in]           
+,max([temp_air_w_out]         ) over ( partition by turbine_serial ) as [temp_air_w_out]          
+,max([temp_bearing_1]         ) over ( partition by turbine_serial ) as [temp_bearing_1]          
+,max([temp_bearing_2]         ) over ( partition by turbine_serial ) as [temp_bearing_2]          
+,max([temp_converter]         ) over ( partition by turbine_serial ) as [temp_converter]          
+,max([temp_converter_coil]    ) over ( partition by turbine_serial ) as [temp_converter_coil]     
+,max([temp_converter_water]   ) over ( partition by turbine_serial ) as [temp_converter_water]    
+,max([temp_gearbox_bearing_1] ) over ( partition by turbine_serial ) as [temp_gearbox_bearing_1]  
+,max([temp_gearbox_bearing_2] ) over ( partition by turbine_serial ) as [temp_gearbox_bearing_2]  
+,max([temp_gearbox_bearing_3] ) over ( partition by turbine_serial ) as [temp_gearbox_bearing_3]  
+,max([temp_gearbox_oil]       ) over ( partition by turbine_serial ) as [temp_gearbox_oil]        
+,max([temp_gen_rotor]         ) over ( partition by turbine_serial ) as [temp_gen_rotor]          
+,max([temp_gen_stator]        ) over ( partition by turbine_serial ) as [temp_gen_stator]         
+,max([temp_in_nacelle]        ) over ( partition by turbine_serial ) as [temp_in_nacelle]         
+,max([temp_in_nacelle_cabinet]) over ( partition by turbine_serial ) as [temp_in_nacelle_cabinet] 
+,max([temp_oil]               ) over ( partition by turbine_serial ) as [temp_oil]                
+,max([temp_phase_1]           ) over ( partition by turbine_serial ) as [temp_phase_1]            
+,max([temp_phase_2]           ) over ( partition by turbine_serial ) as [temp_phase_2]            
+,max([temp_phase_3]           ) over ( partition by turbine_serial ) as [temp_phase_3]            
+,max([temp_ring_1]            ) over ( partition by turbine_serial ) as [temp_ring_1]             
+,max([temp_ring_2]            ) over ( partition by turbine_serial ) as [temp_ring_2]             
+,max([temp_rotor_hub]         ) over ( partition by turbine_serial ) as [temp_rotor_hub]          
+,max([temp_rotor_hub_cabinet] ) over ( partition by turbine_serial ) as [temp_rotor_hub_cabinet]  
+,max([temp_shaft_bearing_1]   ) over ( partition by turbine_serial ) as [temp_shaft_bearing_1]    
+,max([temp_shaft_bearing_2]   ) over ( partition by turbine_serial ) as [temp_shaft_bearing_2]    
+,max([temp_trf_phase_1]       ) over ( partition by turbine_serial ) as [temp_trf_phase_1]        
+,max([temp_trf_phase_2]       ) over ( partition by turbine_serial ) as [temp_trf_phase_2]        
+,max([temp_trf_phase_3]       ) over ( partition by turbine_serial ) as [temp_trf_phase_3]        
+,max([temp_yaw_motor]         ) over ( partition by turbine_serial ) as [temp_yaw_motor]          
+
+FROM [T-SDS-DB01].[dbo].[Facts_600sec_Delta]</property>
+                <property
+                  dataType="System.String"
+                  description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Datenflusstask\OLE DB-Quelle.Connections[OleDbConnection]"
+                  connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                  name="Ausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[turbine_serial]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                      name="turbine_serial"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_air_w_in]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_air_w_in]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_air_w_in]"
+                      name="temp_air_w_in"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_air_w_out]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_air_w_out]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_air_w_out]"
+                      name="temp_air_w_out"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_bearing_1]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_bearing_1]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_bearing_1]"
+                      name="temp_bearing_1"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_bearing_2]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_bearing_2]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_bearing_2]"
+                      name="temp_bearing_2"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_converter]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter]"
+                      name="temp_converter"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter_coil]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_converter_coil]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter_coil]"
+                      name="temp_converter_coil"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter_water]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_converter_water]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_converter_water]"
+                      name="temp_converter_water"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_1]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_bearing_1]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_1]"
+                      name="temp_gearbox_bearing_1"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_2]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_bearing_2]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_2]"
+                      name="temp_gearbox_bearing_2"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_3]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_bearing_3]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_3]"
+                      name="temp_gearbox_bearing_3"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_oil]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_oil]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gearbox_oil]"
+                      name="temp_gearbox_oil"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gen_rotor]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gen_rotor]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gen_rotor]"
+                      name="temp_gen_rotor"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gen_stator]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gen_stator]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_gen_stator]"
+                      name="temp_gen_stator"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_in_nacelle]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_in_nacelle]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_in_nacelle]"
+                      name="temp_in_nacelle"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_in_nacelle_cabinet]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_in_nacelle_cabinet]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_in_nacelle_cabinet]"
+                      name="temp_in_nacelle_cabinet"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_oil]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_oil]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_oil]"
+                      name="temp_oil"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_1]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_phase_1]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_1]"
+                      name="temp_phase_1"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_2]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_phase_2]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_2]"
+                      name="temp_phase_2"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_3]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_phase_3]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_phase_3]"
+                      name="temp_phase_3"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_ring_1]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_ring_1]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_ring_1]"
+                      name="temp_ring_1"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_ring_2]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_ring_2]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_ring_2]"
+                      name="temp_ring_2"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_rotor_hub]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_rotor_hub]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_rotor_hub]"
+                      name="temp_rotor_hub"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_rotor_hub_cabinet]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_rotor_hub_cabinet]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_rotor_hub_cabinet]"
+                      name="temp_rotor_hub_cabinet"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_1]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_shaft_bearing_1]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_1]"
+                      name="temp_shaft_bearing_1"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_2]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_shaft_bearing_2]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_2]"
+                      name="temp_shaft_bearing_2"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_1]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_trf_phase_1]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_1]"
+                      name="temp_trf_phase_1"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_2]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_trf_phase_2]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_2]"
+                      name="temp_trf_phase_2"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_3]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_trf_phase_3]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_trf_phase_3]"
+                      name="temp_trf_phase_3"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_yaw_motor]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_yaw_motor]"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[temp_yaw_motor]"
+                      name="temp_yaw_motor"
+                      precision="20"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[turbine_serial]"
+                      dataType="i4"
+                      name="turbine_serial" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_air_w_in]"
+                      dataType="numeric"
+                      name="temp_air_w_in"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_air_w_out]"
+                      dataType="numeric"
+                      name="temp_air_w_out"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_bearing_1]"
+                      dataType="numeric"
+                      name="temp_bearing_1"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_bearing_2]"
+                      dataType="numeric"
+                      name="temp_bearing_2"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_converter]"
+                      dataType="numeric"
+                      name="temp_converter"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_converter_coil]"
+                      dataType="numeric"
+                      name="temp_converter_coil"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_converter_water]"
+                      dataType="numeric"
+                      name="temp_converter_water"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_bearing_1]"
+                      dataType="numeric"
+                      name="temp_gearbox_bearing_1"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_bearing_2]"
+                      dataType="numeric"
+                      name="temp_gearbox_bearing_2"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_bearing_3]"
+                      dataType="numeric"
+                      name="temp_gearbox_bearing_3"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gearbox_oil]"
+                      dataType="numeric"
+                      name="temp_gearbox_oil"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gen_rotor]"
+                      dataType="numeric"
+                      name="temp_gen_rotor"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_gen_stator]"
+                      dataType="numeric"
+                      name="temp_gen_stator"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_in_nacelle]"
+                      dataType="numeric"
+                      name="temp_in_nacelle"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_in_nacelle_cabinet]"
+                      dataType="numeric"
+                      name="temp_in_nacelle_cabinet"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_oil]"
+                      dataType="numeric"
+                      name="temp_oil"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_phase_1]"
+                      dataType="numeric"
+                      name="temp_phase_1"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_phase_2]"
+                      dataType="numeric"
+                      name="temp_phase_2"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_phase_3]"
+                      dataType="numeric"
+                      name="temp_phase_3"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_ring_1]"
+                      dataType="numeric"
+                      name="temp_ring_1"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_ring_2]"
+                      dataType="numeric"
+                      name="temp_ring_2"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_rotor_hub]"
+                      dataType="numeric"
+                      name="temp_rotor_hub"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_rotor_hub_cabinet]"
+                      dataType="numeric"
+                      name="temp_rotor_hub_cabinet"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_shaft_bearing_1]"
+                      dataType="numeric"
+                      name="temp_shaft_bearing_1"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_shaft_bearing_2]"
+                      dataType="numeric"
+                      name="temp_shaft_bearing_2"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_trf_phase_1]"
+                      dataType="numeric"
+                      name="temp_trf_phase_1"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_trf_phase_2]"
+                      dataType="numeric"
+                      name="temp_trf_phase_2"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_trf_phase_3]"
+                      dataType="numeric"
+                      name="temp_trf_phase_3"
+                      precision="20"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[temp_yaw_motor]"
+                      dataType="numeric"
+                      name="temp_yaw_motor"
+                      precision="20"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                  isErrorOut="true"
+                  name="Fehlerausgabe der OLE DB-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                      name="turbine_serial" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_air_w_in]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_air_w_in]"
+                      name="temp_air_w_in"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_air_w_out]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_air_w_out]"
+                      name="temp_air_w_out"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_bearing_1]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_bearing_1]"
+                      name="temp_bearing_1"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_bearing_2]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_bearing_2]"
+                      name="temp_bearing_2"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_converter]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_converter]"
+                      name="temp_converter"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_converter_coil]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_converter_coil]"
+                      name="temp_converter_coil"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_converter_water]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_converter_water]"
+                      name="temp_converter_water"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_1]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_1]"
+                      name="temp_gearbox_bearing_1"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_2]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_2]"
+                      name="temp_gearbox_bearing_2"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_3]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_bearing_3]"
+                      name="temp_gearbox_bearing_3"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_oil]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gearbox_oil]"
+                      name="temp_gearbox_oil"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gen_rotor]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gen_rotor]"
+                      name="temp_gen_rotor"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gen_stator]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_gen_stator]"
+                      name="temp_gen_stator"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_in_nacelle]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_in_nacelle]"
+                      name="temp_in_nacelle"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_in_nacelle_cabinet]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_in_nacelle_cabinet]"
+                      name="temp_in_nacelle_cabinet"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_oil]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_oil]"
+                      name="temp_oil"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_phase_1]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_phase_1]"
+                      name="temp_phase_1"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_phase_2]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_phase_2]"
+                      name="temp_phase_2"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_phase_3]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_phase_3]"
+                      name="temp_phase_3"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_ring_1]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_ring_1]"
+                      name="temp_ring_1"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_ring_2]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_ring_2]"
+                      name="temp_ring_2"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_rotor_hub]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_rotor_hub]"
+                      name="temp_rotor_hub"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_rotor_hub_cabinet]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_rotor_hub_cabinet]"
+                      name="temp_rotor_hub_cabinet"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_1]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_1]"
+                      name="temp_shaft_bearing_1"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_2]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_shaft_bearing_2]"
+                      name="temp_shaft_bearing_2"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_trf_phase_1]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_trf_phase_1]"
+                      name="temp_trf_phase_1"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_trf_phase_2]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_trf_phase_2]"
+                      name="temp_trf_phase_2"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_trf_phase_3]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_trf_phase_3]"
+                      name="temp_trf_phase_3"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_yaw_motor]"
+                      dataType="numeric"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[temp_yaw_motor]"
+                      name="temp_yaw_motor"
+                      precision="20"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Datenflusstask\OLE DB-Ziel"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+              description="OLE DB-Ziel"
+              name="OLE DB-Ziel"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset">[META_DEVICE_MEASURE]</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Datenflusstask\OLE DB-Ziel.Connections[OleDbConnection]"
+                  connectionManagerID="{0871f5b6-ff6d-43e2-946e-7ec9d210179b}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB00]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  errorOrTruncationOperation="Einfügen"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Eingabe des OLE DB-Ziels">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[temp]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="temp"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[MEASURE]"
+                      lineageId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[temp]" />
+                    <inputColumn
+                      refId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[turbine_serial]"
+                      cachedDataType="i4"
+                      cachedName="turbine_serial"
+                      externalMetadataColumnId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[DEVICE]"
+                      lineageId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren].Columns[turbine_serial]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[DEVICE]"
+                      dataType="i4"
+                      name="DEVICE" />
+                    <externalMetadataColumn
+                      refId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[MEASURE]"
+                      dataType="wstr"
+                      length="255"
+                      name="MEASURE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Datenflusstask\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Fehlerausgabe des OLE DB-Ziels"
+                  synchronousInputId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Datenflusstask\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Datenflusstask\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Datenflusstask.Paths[Ausgabe der OLE DB-Quelle]"
+              endId="Package\Datenflusstask\Entpivotieren.Inputs[Eingabe entpivotieren]"
+              name="Ausgabe der OLE DB-Quelle"
+              startId="Package\Datenflusstask\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+            <path
+              refId="Package\Datenflusstask.Paths[Ausgabe entpivotieren]"
+              endId="Package\Datenflusstask\Bedingtes Teilen.Inputs[Eingabe für bedingtes Teilen]"
+              name="Ausgabe entpivotieren"
+              startId="Package\Datenflusstask\Entpivotieren.Outputs[Ausgabe entpivotieren]" />
+            <path
+              refId="Package\Datenflusstask.Paths[Fall 1]"
+              endId="Package\Datenflusstask\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+              name="Fall 1"
+              startId="Package\Datenflusstask\Bedingtes Teilen.Outputs[Fall 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Facts_600sec_Delta"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Datenflusstask"
+      DTS:Disabled="True"
       DTS:DTSID="{6AD05692-E6D7-474E-B0D4-D3FC1D07393F}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -9603,6 +11339,7 @@
       DTS:refId="Package\META_TIME_PERIODS"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Datenflusstask"
+      DTS:Disabled="True"
       DTS:DTSID="{AF2EC096-DF79-4983-98EB-DCCB7C21F358}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -9931,6 +11668,7 @@
       DTS:refId="Package\META_TIME_SERIE"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Datenflusstask"
+      DTS:Disabled="True"
       DTS:DTSID="{A7CAE783-F5F9-4DDF-BFE8-816CC181464B}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -10250,6 +11988,7 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
       DTS:refId="Package\TRUNCATE Facts_600sec_Delta"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Task &quot;SQL ausführen&quot;"
+      DTS:Disabled="True"
       DTS:DTSID="{2D9358EA-8F6E-4735-B110-C2B5F3543BC9}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -10267,6 +12006,7 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
       DTS:refId="Package\TRUNCATE META_TIME_PERIODS"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Task &quot;SQL ausführen&quot;"
+      DTS:Disabled="True"
       DTS:DTSID="{45E42BB9-7524-4CF1-AC0E-20015C60CA41}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -10284,6 +12024,7 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
       DTS:refId="Package\TRUNCATE META_TIME_SERIE"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Task &quot;SQL ausführen&quot;"
+      DTS:Disabled="True"
       DTS:DTSID="{209401AD-967D-48B4-9DD4-2D6D6EEDE8A0}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -10353,13 +12094,29 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="279,42"
+          Size="279.2,41.6"
           Id="Package\Facts_600sec_Delta"
           TopLeft="4,107.5" />
         <NodeLayout
-          Size="279,42"
+          Size="279.2,41.6"
+          Id="Package\META_TIME_PERIODS"
+          TopLeft="4,311.5" />
+        <NodeLayout
+          Size="279.2,41.6"
+          Id="Package\META_TIME_SERIE"
+          TopLeft="4,535" />
+        <NodeLayout
+          Size="279.2,41.6"
           Id="Package\TRUNCATE Facts_600sec_Delta"
           TopLeft="4,5.5" />
+        <NodeLayout
+          Size="279.2,41.6"
+          Id="Package\TRUNCATE META_TIME_PERIODS"
+          TopLeft="4,209.5" />
+        <NodeLayout
+          Size="279.2,41.6"
+          Id="Package\TRUNCATE META_TIME_SERIE"
+          TopLeft="0,420" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung]"
           TopLeft="143.5,47.5">
@@ -10382,14 +12139,6 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="279,42"
-          Id="Package\META_TIME_PERIODS"
-          TopLeft="4,311.5" />
-        <NodeLayout
-          Size="279,42"
-          Id="Package\TRUNCATE META_TIME_PERIODS"
-          TopLeft="4,209.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 1]"
           TopLeft="143.5,251.5">
@@ -10434,14 +12183,6 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="279,42"
-          Id="Package\META_TIME_SERIE"
-          TopLeft="4,535" />
-        <NodeLayout
-          Size="279,42"
-          Id="Package\TRUNCATE META_TIME_SERIE"
-          TopLeft="0,420" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 3]"
           TopLeft="141.5,462">
@@ -10486,6 +12227,10 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\Datenflusstask"
+          TopLeft="481.6,44" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -10493,7 +12238,7 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
     design-time-name="Package\Facts_600sec_Delta">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="175,42"
           Id="Package\Facts_600sec_Delta\OLE DB-Quelle"
@@ -10521,25 +12266,14 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Facts_600sec_Delta\OLE DB-Quelle">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">View</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Facts_600sec_Delta\Facts_600sec_Delta">
     <Properties>
@@ -10553,11 +12287,24 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Facts_600sec_Delta\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\META_TIME_PERIODS">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="201,42"
           Id="Package\META_TIME_PERIODS\OLE DB-Quelle"
@@ -10585,20 +12332,14 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\META_TIME_PERIODS\OLE DB-Quelle">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\META_TIME_PERIODS\META_TIME_PERIODS">
     <Properties>
@@ -10612,11 +12353,19 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\META_TIME_PERIODS\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\META_TIME_SERIE">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="181,42"
           Id="Package\META_TIME_SERIE\OLE DB-Quelle"
@@ -10644,12 +12393,27 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\META_TIME_SERIE\META_TIME_SERIE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\META_TIME_SERIE\OLE DB-Quelle">
     <Properties>
@@ -10658,8 +12422,144 @@ ORDER BY 1 , 2  option (maxrecursion 0)</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Datenflusstask">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Datenflusstask\OLE DB-Quelle"
+          TopLeft="111.2,32.8" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Datenflusstask\Entpivotieren"
+          TopLeft="192.8,168" />
+        <EdgeLayout
+          Id="Package\Datenflusstask.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="180.8,74.4">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="76.8,93.6"
+              Start="0,0"
+              End="76.8,86.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42.8"
+                    Point2="0,46.8"
+                    Point3="4,46.8" />
+                  <mssgle:LineSegment
+                    End="72.8,46.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="72.8,46.8"
+                    Point2="76.8,46.8"
+                    Point3="76.8,50.8" />
+                  <mssgle:LineSegment
+                    End="76.8,86.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\Datenflusstask\Bedingtes Teilen"
+          TopLeft="381.6,219.2" />
+        <EdgeLayout
+          Id="Package\Datenflusstask.Paths[Ausgabe entpivotieren]"
+          TopLeft="322.4,188.8">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59.2,51.2"
+              Start="0,0"
+              End="51.7,51.2">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="25.6,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.6,0"
+                    Point2="29.6,0"
+                    Point3="29.6,4" />
+                  <mssgle:LineSegment
+                    End="29.6,47.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.6,47.2"
+                    Point2="29.6,51.2"
+                    Point3="33.6,51.2" />
+                  <mssgle:LineSegment
+                    End="51.7,51.2" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="128,41.6"
+          Id="Package\Datenflusstask\OLE DB-Ziel"
+          TopLeft="553.5,311.9" />
+        <EdgeLayout
+          Id="Package\Datenflusstask.Paths[Fall 1]"
+          TopLeft="453.6,260.8">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="163.9,51.1"
+              Start="0,0"
+              End="163.9,43.6">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.55"
+                    Point2="0,25.55"
+                    Point3="4,25.55" />
+                  <mssgle:LineSegment
+                    End="159.9,25.55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="159.9,25.55"
+                    Point2="163.9,25.55"
+                    Point3="163.9,29.55" />
+                  <mssgle:LineSegment
+                    End="163.9,43.6" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="69.90943359375,30.55,24.0811328125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\META_TIME_SERIE\META_TIME_SERIE">
+    design-time-name="Package\Datenflusstask\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Datenflusstask\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

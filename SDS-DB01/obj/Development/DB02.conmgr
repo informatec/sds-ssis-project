@@ -5,10 +5,6 @@
   DTS:CreationName="OLEDB">
   <DTS:ObjectData>
     <DTS:ConnectionManager
-      DTS:ConnectionString="Data Source=t-sds-qap-sql.umwerk.net;User ID=dbadmin;Initial Catalog=T-SDS-DB02;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
-      <DTS:Password
-        DTS:Name="Password"
-        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASFudscpOAEGIb0RP6YF5KgAAAAACAAAAAAADZgAAwAAAABAAAABoC0NkkmqdyxSWQI72OJpUAAAAAASAAACgAAAAEAAAACW6g1kZ0fYOYyMD8rYRRBN4AAAA1nA9gVvjrYeeD5ruRB03zfdssTUp4KPlOkc5qtXt1XDqsj7GAsMW2szNISMz9YZjQNx6qVvnDrPacpmTC9oUuDXLhm4xmBgU4DwLdT3TUj/kZM2/kDPJOe0TgogIySeAJmAo67ix/yxyrYmRg/kzhGlMJV1HtQ+PFAAAAH7s1lUpQTlrfGggsh7HbVZJX0Uw</DTS:Password>
-    </DTS:ConnectionManager>
+      DTS:ConnectionString="Data Source=T-SDS-QAP-MSSQL;Initial Catalog=T-SDS-DB02;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>

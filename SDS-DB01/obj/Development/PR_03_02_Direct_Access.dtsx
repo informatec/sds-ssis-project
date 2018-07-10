@@ -11,11 +11,44 @@
   DTS:LocaleID="2055"
   DTS:ObjectName="PR_03_02_Direct_Access"
   DTS:PackageType="5"
-  DTS:VersionBuild="55"
-  DTS:VersionGUID="{E7D72F48-35FC-4535-A0C2-AEAEC8329BFF}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{67A79E9B-A51F-4ACE-866F-7263024000AA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CEE9237B-97C3-4CA5-908F-46583A70534B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;T_PRODUCTION_&quot; +  @[User::windpark]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="tn_production_windpark">
+      <DTS:VariableValue
+        DTS:DataType="8">T_PRODUCTION_</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{64817854-7B9B-424D-864B-9B3F71C7E1CD}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;T_TORNADO_&quot; +  @[User::windpark]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="tn_tornado_windpark">
+      <DTS:VariableValue
+        DTS:DataType="8">T_TORNADO_</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B10A5472-087C-43E5-9035-F35BFC63995B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;T_WIND_DIRECTION_&quot; +  @[User::windpark]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="tn_winddirection_windpark">
+      <DTS:VariableValue
+        DTS:DataType="8">T_WIND_DIRECTION_</DTS:VariableValue>
+    </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{203617BC-81E2-4376-881C-AED43D9203BB}"
@@ -78,9 +111,1624 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
+          DTS:refId="Package\Foreach-Schleifencontainer\PRODUCTION"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Datenflusstask"
+          DTS:Disabled="True"
+          DTS:DTSID="{2c2437e6-c1a0-49d7-8972-3b218e3869cf}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="PRODUCTION"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB-Quelle"
+                  name="OLE DB-Quelle"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+     [time_stamp] AS UNIX_TS
+	  ,[turbine_serial] as device
+      ,SUM([actual_power_kw]) AS [actual_power_kw]
+	  ,SUM( [power_loss_kw] ) AS [actual_power_loss]
+	  ,SUM([revenues]) AS [revenues]
+	  ,SUM([revenues_losses]) AS [revenues_losses]
+  FROM [T-SDS-DB01].[dbo].[Facts_600sec_Delta]
+  where park = ( SELECT [WP_M_TXT]
+  FROM [T-SDS-DB02].[dbo].[C_DV_WINDPARK_E]
+  where [WP_CODE] = ?  )
+  GROUP BY [time_stamp] , [turbine_serial]
+order by 1</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                      name="ParameterMapping">"00001:Input",{BA9CCE59-ECA0-48A3-A866-16A3CEA28474};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Connections[OleDbConnection]"
+                      connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                      name="Ausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_kw]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_loss]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          name="actual_power_loss"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[device]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[device]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[device]"
+                          name="device"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues]"
+                          name="revenues"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues_losses]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          name="revenues_losses"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          dataType="i8"
+                          name="UNIX_TS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_kw]"
+                          dataType="numeric"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_loss]"
+                          dataType="numeric"
+                          name="actual_power_loss"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[device]"
+                          dataType="i4"
+                          name="device" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues]"
+                          dataType="numeric"
+                          name="revenues"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues_losses]"
+                          dataType="numeric"
+                          name="revenues_losses"
+                          precision="38"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                      isErrorOut="true"
+                      name="Fehlerausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[device]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[device]"
+                          name="device" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          name="actual_power_loss"
+                          precision="38"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues]"
+                          name="revenues"
+                          precision="38"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          name="revenues_losses"
+                          precision="38"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB-Ziel"
+                  name="OLE DB-Ziel"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable">User::tn_production_windpark</property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">4</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Connections[OleDbConnection]"
+                      connectionManagerID="{3b228717-13f4-46e7-9cab-dba99d98c8f9}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB03]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                      errorOrTruncationOperation="Einfügen"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Eingabe des OLE DB-Ziels">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[UNIX_TS]"
+                          cachedDataType="i8"
+                          cachedName="UNIX_TS"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[actual_power_kw]"
+                          cachedDataType="numeric"
+                          cachedName="actual_power_kw"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_kw]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[actual_power_loss]"
+                          cachedDataType="numeric"
+                          cachedName="actual_power_loss"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_loss]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[device]"
+                          cachedDataType="i4"
+                          cachedName="device"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[device]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[device]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[revenues]"
+                          cachedDataType="numeric"
+                          cachedName="revenues"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[revenues_losses]"
+                          cachedDataType="numeric"
+                          cachedName="revenues_losses"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues_losses]"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                          dataType="i8"
+                          name="UNIX_TS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[device]"
+                          dataType="i4"
+                          name="device" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_kw]"
+                          dataType="numeric"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_loss]"
+                          dataType="numeric"
+                          name="actual_power_loss"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues]"
+                          dataType="numeric"
+                          name="revenues"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[revenues_losses]"
+                          dataType="numeric"
+                          name="revenues_losses"
+                          precision="38"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Fehlerausgabe des OLE DB-Ziels"
+                      synchronousInputId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach-Schleifencontainer\PRODUCTION.Paths[Ausgabe der OLE DB-Quelle]"
+                  endId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  name="Ausgabe der OLE DB-Quelle"
+                  startId="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach-Schleifencontainer\TORNADO WP"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Datenflusstask"
+          DTS:Disabled="True"
+          DTS:DTSID="{f58b19a4-95f1-4e17-aef2-f91474bde4bc}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TORNADO WP"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Abgeleitete Spalte;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;0"
+                  description="Erstellt neue Spaltenwerte, indem Ausdrücke auf Transformationseingabespalten angewendet werden. Erstellen Sie neue Spalten, oder überschreiben Sie vorhandene. Verketten Sie beispielsweise die Werte der Spalten &quot;first name&quot; und &quot;last name&quot;, um die Spalte &quot;full name&quot; zu erhalten."
+                  name="Abgeleitete Spalte"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]"
+                      description="Eingabe der Transformation für abgeleiteten Spalten"
+                      name="Eingabe der abgeleiteten Spalte">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte].Columns[AVAILABILITY_SUM]"
+                          cachedDataType="numeric"
+                          cachedName="AVAILABILITY_SUM"
+                          cachedPrecision="38"
+                          cachedScale="6"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY_SUM]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte].Columns[AVAILABILITY _COUNT]"
+                          cachedDataType="ui8"
+                          cachedName="AVAILABILITY _COUNT"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY _COUNT]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte]"
+                      description="Standardausgabe der Transformation für abgeleitete Spalten"
+                      exclusionGroup="1"
+                      name="Ausgabe der abgeleiteten Spalte"
+                      synchronousInputId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[AVAILABILITY_RESULT]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Berechnung"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[AVAILABILITY_RESULT]"
+                          name="AVAILABILITY_RESULT"
+                          precision="38"
+                          scale="6"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Ausdruck für abgeleitete Spalte"
+                              name="Expression">(#{Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY_SUM]} / #{Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY _COUNT]}) * 100</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Angezeigter Ausdruck für abgeleitete Spalte"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(AVAILABILITY_SUM / [AVAILABILITY _COUNT]) * 100</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte]"
+                      description="Fehlerausgabe der Transformation für abgeleitete Spalten"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Fehlerausgabe der abgeleiteten Spalte"
+                      synchronousInputId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE"
+                  componentClassID="Microsoft.Aggregate"
+                  contactInfo="AGGREGATE;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;3"
+                  description="Aggregiert Daten mit Funktionen wie &quot;Average&quot;, &quot;Sum&quot;, &quot;Count&quot;, &quot;Max&quot; und &quot;Min&quot;. Beispielsweise können Sie Daten gruppieren, um die Summe der Verkäufe pro Produkt oder die durchschnittlichen Besucher pro Tag zu berechnen."
+                  name="AGGREGATE"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die ungefähre Anzahl der GROUP BY-Schlüssel an, die von der Aggregation erstellt werden. LOW zeigt 500.000 Schlüsselwerte, MEDIUM 5 Millionen Schlüsselwerte und HIGH mehr als 25 Millionen Schlüsselwerte an. 'Keine Angabe' zeigt an, dass kein KeyScale-Wert verwendet wird."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Gibt die genaue Anzahl der GROUP BY-Schlüssel an, die von der Aggregation erstellt werden. Wenn ein Wert für &quot;KeyScale&quot; angegeben wird, hat der Wert in &quot;Keys&quot; Vorrang."
+                      name="Keys" />
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die ungefähre Anzahl der unterschiedlichen Werte in einer Spalte an, die von der Aggregation als unterschiedliche Werte gezählt werden. LOW zeigt 500.000 Schlüsselwerte, MEDIUM 5 Millionen Schlüsselwerte und HIGH mehr als 25 Millionen Schlüsselwerte an. 'Keine Angabe' zeigt an, dass kein CountDistinctScale-Wert verwendet wird."
+                      name="CountDistinctScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Gibt die genaue Anzahl der unterschiedlichen Werte in einer Spalte an, die von der Aggregation als unterschiedlichen Werte gezählt werden. Wenn ein CountDistinctScale-Wert angegeben wird, hat der Wert in 'CountDistinctKeys' Vorrang."
+                      name="CountDistinctKeys" />
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den Prozentsatz an, um den der Arbeitsspeicher beim Aggregieren erweitert werden kann. Gültige Werte liegen zwischen 1 und 100."
+                      name="AutoExtendFactor">25</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats]"
+                      name="Eingabe 1 des Aggregats">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats].Columns[revenues_losses]"
+                          cachedDataType="numeric"
+                          cachedName="revenues_losses"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats].Columns[AVAILABILITY]"
+                          cachedDataType="numeric"
+                          cachedName="AVAILABILITY"
+                          cachedPrecision="38"
+                          cachedScale="6"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[AVAILABILITY]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats].Columns[EFFICIENCY]"
+                          cachedDataType="numeric"
+                          cachedName="EFFICIENCY"
+                          cachedPrecision="38"
+                          cachedScale="6"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[EFFICIENCY]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats].Columns[actual_power_loss]"
+                          cachedDataType="numeric"
+                          cachedName="actual_power_loss"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats].Columns[time_stamp]"
+                          cachedDataType="i8"
+                          cachedName="time_stamp"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[time_stamp]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats].Columns[turbine_serial]"
+                          cachedDataType="i4"
+                          cachedName="turbine_serial"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[turbine_serial]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1]"
+                      name="Ausgabe des Aggregats 1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt die ungefähre Anzahl der GROUP BY-Schlüssel an, die von der Aggregation erstellt werden. LOW zeigt 500.000 Schlüsselwerte, MEDIUM 5 Millionen Schlüsselwerte und HIGH mehr als 25 Millionen Schlüsselwerte an. 'Keine Angabe' zeigt an, dass kein KeyScale-Wert verwendet wird."
+                          name="KeyScale"
+                          typeConverter="KeyScaleType">0</property>
+                        <property
+                          dataType="System.Null"
+                          description="Gibt die genaue Anzahl der GROUP BY-Schlüssel an, die von der Aggregation erstellt werden. Wenn ein Wert für &quot;KeyScale&quot; angegeben wird, hat der Wert in &quot;Keys&quot; Vorrang."
+                          name="Keys" />
+                      </properties>
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[revenues_losses]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[revenues_losses]"
+                          name="revenues_losses"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Gibt die ID der Eingabespalte an, die in der Aggregation verwendet wird."
+                              name="AggregationColumnId">#{Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt den Typ der Aggregation an."
+                              name="AggregationType"
+                              typeConverter="AggregationType">4</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Zeigt an, ob für die Spalte eine besondere Verarbeitung erforderlich ist, weil sie möglicherweise übergroße Daten enthält oder eine höhere Genauigkeit als den float-Datentyp erfordert."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt die Optionen für Zeichenfolgenvergleiche an."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY_SUM]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY_SUM]"
+                          name="AVAILABILITY_SUM"
+                          precision="38"
+                          scale="6">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Gibt die ID der Eingabespalte an, die in der Aggregation verwendet wird."
+                              name="AggregationColumnId">#{Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[AVAILABILITY]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt den Typ der Aggregation an."
+                              name="AggregationType"
+                              typeConverter="AggregationType">4</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Zeigt an, ob für die Spalte eine besondere Verarbeitung erforderlich ist, weil sie möglicherweise übergroße Daten enthält oder eine höhere Genauigkeit als den float-Datentyp erfordert."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt die Optionen für Zeichenfolgenvergleiche an."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[EFFICIENCY]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[EFFICIENCY]"
+                          name="EFFICIENCY"
+                          precision="38"
+                          scale="6">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Gibt die ID der Eingabespalte an, die in der Aggregation verwendet wird."
+                              name="AggregationColumnId">#{Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[EFFICIENCY]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt den Typ der Aggregation an."
+                              name="AggregationType"
+                              typeConverter="AggregationType">5</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Zeigt an, ob für die Spalte eine besondere Verarbeitung erforderlich ist, weil sie möglicherweise übergroße Daten enthält oder eine höhere Genauigkeit als den float-Datentyp erfordert."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt die Optionen für Zeichenfolgenvergleiche an."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[actual_power_loss]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[actual_power_loss]"
+                          name="actual_power_loss"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Gibt die ID der Eingabespalte an, die in der Aggregation verwendet wird."
+                              name="AggregationColumnId">#{Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt den Typ der Aggregation an."
+                              name="AggregationType"
+                              typeConverter="AggregationType">4</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Zeigt an, ob für die Spalte eine besondere Verarbeitung erforderlich ist, weil sie möglicherweise übergroße Daten enthält oder eine höhere Genauigkeit als den float-Datentyp erfordert."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt die Optionen für Zeichenfolgenvergleiche an."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[time_stamp]"
+                          dataType="i8"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[time_stamp]"
+                          name="time_stamp">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Gibt die ID der Eingabespalte an, die in der Aggregation verwendet wird."
+                              name="AggregationColumnId">#{Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[time_stamp]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt den Typ der Aggregation an."
+                              name="AggregationType"
+                              typeConverter="AggregationType">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Zeigt an, ob für die Spalte eine besondere Verarbeitung erforderlich ist, weil sie möglicherweise übergroße Daten enthält oder eine höhere Genauigkeit als den float-Datentyp erfordert."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt die Optionen für Zeichenfolgenvergleiche an."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY _COUNT]"
+                          dataType="ui8"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[AVAILABILITY _COUNT]"
+                          name="AVAILABILITY _COUNT">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Gibt die ID der Eingabespalte an, die in der Aggregation verwendet wird."
+                              name="AggregationColumnId">#{Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[AVAILABILITY]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt den Typ der Aggregation an."
+                              name="AggregationType"
+                              typeConverter="AggregationType">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Zeigt an, ob für die Spalte eine besondere Verarbeitung erforderlich ist, weil sie möglicherweise übergroße Daten enthält oder eine höhere Genauigkeit als den float-Datentyp erfordert."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt die Optionen für Zeichenfolgenvergleiche an."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[turbine_serial]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[turbine_serial]"
+                          name="turbine_serial">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Gibt die ID der Eingabespalte an, die in der Aggregation verwendet wird."
+                              name="AggregationColumnId">#{Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[turbine_serial]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt den Typ der Aggregation an."
+                              name="AggregationType"
+                              typeConverter="AggregationType">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Zeigt an, ob für die Spalte eine besondere Verarbeitung erforderlich ist, weil sie möglicherweise übergroße Daten enthält oder eine höhere Genauigkeit als den float-Datentyp erfordert."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Gibt die Optionen für Zeichenfolgenvergleiche an."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB-Ziel"
+                  name="OLE DB-Ziel"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset">[dbo].[T_TORNADO_TOTAL]</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable">User::tn_tornado_windpark</property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">4</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Connections[OleDbConnection]"
+                      connectionManagerID="{3b228717-13f4-46e7-9cab-dba99d98c8f9}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB03]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                      errorOrTruncationOperation="Einfügen"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Eingabe des OLE DB-Ziels">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[EFFICIENCY]"
+                          cachedDataType="numeric"
+                          cachedName="EFFICIENCY"
+                          cachedPrecision="38"
+                          cachedScale="6"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[EFFICIENCY]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[EFFICIENCY]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[AVAILABILITY_RESULT]"
+                          cachedDataType="numeric"
+                          cachedName="AVAILABILITY_RESULT"
+                          cachedPrecision="38"
+                          cachedScale="6"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[AVAILABILITY]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[AVAILABILITY_RESULT]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[time_stamp]"
+                          cachedDataType="i8"
+                          cachedName="time_stamp"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[time_stamp]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[revenues_losses]"
+                          cachedDataType="numeric"
+                          cachedName="revenues_losses"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[REVENUE_LOSS]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[revenues_losses]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[actual_power_loss]"
+                          cachedDataType="numeric"
+                          cachedName="actual_power_loss"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRODUCTION_LOSS]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[actual_power_loss]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[turbine_serial]"
+                          cachedDataType="i4"
+                          cachedName="turbine_serial"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[DEVICE]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1].Columns[turbine_serial]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                          dataType="i8"
+                          name="UNIX_TS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[AVAILABILITY]"
+                          dataType="numeric"
+                          name="AVAILABILITY"
+                          precision="38"
+                          scale="6" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[EFFICIENCY]"
+                          dataType="numeric"
+                          name="EFFICIENCY"
+                          precision="38"
+                          scale="6" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[PRODUCTION_LOSS]"
+                          dataType="numeric"
+                          name="PRODUCTION_LOSS"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[REVENUE_LOSS]"
+                          dataType="numeric"
+                          name="REVENUE_LOSS"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[DEVICE]"
+                          dataType="i4"
+                          name="DEVICE" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Fehlerausgabe des OLE DB-Ziels"
+                      synchronousInputId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB-Quelle"
+                  name="SELECT 1"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+     [time_stamp]
+	  ,turbine_serial
+      , [av_relev_prod]  as AVAILABILITY
+	  ,  [efficiency] AS  EFFICIENCY
+	  ,[power_loss_kw] AS [actual_power_loss]
+	  ,[revenues_losses] AS [revenues_losses]
+  FROM [T-SDS-DB01].[dbo].[Facts_600sec_Delta]
+
+  WHERE park = (
+  SELECT [WP_M_TXT]
+  FROM [T-SDS-DB02].[dbo].[C_DV_WINDPARK_E] WHERE [WP_CODE] = ?
+  )</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                      name="ParameterMapping">"00001:Input",{BA9CCE59-ECA0-48A3-A866-16A3CEA28474};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Connections[OleDbConnection]"
+                      connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle]"
+                      name="Ausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues_losses]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          name="revenues_losses"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[AVAILABILITY]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[AVAILABILITY]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[AVAILABILITY]"
+                          name="AVAILABILITY"
+                          precision="38"
+                          scale="6"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[EFFICIENCY]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[EFFICIENCY]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[EFFICIENCY]"
+                          name="EFFICIENCY"
+                          precision="38"
+                          scale="6"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_loss]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          name="actual_power_loss"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[time_stamp]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          name="time_stamp"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[turbine_serial]"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                          name="turbine_serial"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[revenues_losses]"
+                          dataType="numeric"
+                          name="revenues_losses"
+                          precision="20"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[AVAILABILITY]"
+                          dataType="numeric"
+                          name="AVAILABILITY"
+                          precision="20"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[EFFICIENCY]"
+                          dataType="numeric"
+                          name="EFFICIENCY"
+                          precision="20"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_loss]"
+                          dataType="numeric"
+                          name="actual_power_loss"
+                          precision="20"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[time_stamp]"
+                          dataType="i8"
+                          name="time_stamp" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[turbine_serial]"
+                          dataType="i4"
+                          name="turbine_serial" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                      isErrorOut="true"
+                      name="Fehlerausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          dataType="i8"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          name="time_stamp" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[turbine_serial]"
+                          name="turbine_serial" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[AVAILABILITY]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[AVAILABILITY]"
+                          name="AVAILABILITY"
+                          precision="20"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[EFFICIENCY]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[EFFICIENCY]"
+                          name="EFFICIENCY"
+                          precision="20"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_loss]"
+                          name="actual_power_loss"
+                          precision="20"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[revenues_losses]"
+                          name="revenues_losses"
+                          precision="20"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach-Schleifencontainer\TORNADO WP.Paths[Ausgabe der abgeleiteten Spalte]"
+                  endId="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  name="Ausgabe der abgeleiteten Spalte"
+                  startId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte]" />
+                <path
+                  refId="Package\Foreach-Schleifencontainer\TORNADO WP.Paths[Ausgabe der OLE DB-Quelle]"
+                  endId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Inputs[Eingabe 1 des Aggregats]"
+                  name="Ausgabe der OLE DB-Quelle"
+                  startId="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle]" />
+                <path
+                  refId="Package\Foreach-Schleifencontainer\TORNADO WP.Paths[Ausgabe des Aggregats 1]"
+                  endId="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]"
+                  name="Ausgabe des Aggregats 1"
+                  startId="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE.Outputs[Ausgabe des Aggregats 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach-Schleifencontainer\WINDDIRECTION"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Datenflusstask"
+          DTS:Disabled="True"
+          DTS:DTSID="{653266a2-b359-4ec5-ab4e-2d3c4b917b78}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="WINDDIRECTION"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB-Ziel"
+                  name="OLE DB-Ziel"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable">User::tn_winddirection_windpark</property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">4</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Connections[OleDbConnection]"
+                      connectionManagerID="{3b228717-13f4-46e7-9cab-dba99d98c8f9}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB03]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                      errorOrTruncationOperation="Einfügen"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Eingabe des OLE DB-Ziels">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[wind_direction]"
+                          cachedDataType="i4"
+                          cachedName="wind_direction"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[wind_direction]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[wind_direction]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[actual_power_kw]"
+                          cachedDataType="numeric"
+                          cachedName="actual_power_kw"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_kw]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[frequency]"
+                          cachedDataType="i4"
+                          cachedName="frequency"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[frequency]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[frequency]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[time_stamp]"
+                          cachedDataType="i8"
+                          cachedName="time_stamp"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[time_stamp]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[wind_direction]"
+                          dataType="i4"
+                          name="wind_direction" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[actual_power_kw]"
+                          dataType="numeric"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[frequency]"
+                          dataType="i4"
+                          name="frequency" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIX_TS]"
+                          dataType="i8"
+                          name="UNIX_TS" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Fehlerausgabe des OLE DB-Ziels"
+                      synchronousInputId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB-Quelle"
+                  name="SELECT 1"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select 
+[time_stamp],
+convert(int, [wind_direction] / 45 ) as  [wind_direction],
+sum(actual_power_kw) as actual_power_kw,
+count(convert(int, [wind_direction] / 45 )) as frequency
+
+from [dbo].[Facts_600sec_Delta]
+  WHERE park = (
+  SELECT [WP_M_TXT]
+  FROM [T-SDS-DB02].[dbo].[C_DV_WINDPARK_E] WHERE [WP_CODE] = ?
+  )
+  group by 
+  convert(int, [wind_direction] / 45 ), 
+  [time_stamp]</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                      name="ParameterMapping">"00001:Input",{BA9CCE59-ECA0-48A3-A866-16A3CEA28474};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Connections[OleDbConnection]"
+                      connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle]"
+                      name="Ausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[time_stamp]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          name="time_stamp"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[wind_direction]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[wind_direction]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[wind_direction]"
+                          name="wind_direction"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_kw]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[frequency]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[frequency]"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].Columns[frequency]"
+                          name="frequency"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[time_stamp]"
+                          dataType="i8"
+                          name="time_stamp" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[wind_direction]"
+                          dataType="i4"
+                          name="wind_direction" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[actual_power_kw]"
+                          dataType="numeric"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[frequency]"
+                          dataType="i4"
+                          name="frequency" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                      isErrorOut="true"
+                      name="Fehlerausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          dataType="i8"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[time_stamp]"
+                          name="time_stamp" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[wind_direction]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[wind_direction]"
+                          name="wind_direction" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[actual_power_kw]"
+                          name="actual_power_kw"
+                          precision="38"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[frequency]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[frequency]"
+                          name="frequency" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach-Schleifencontainer\WINDDIRECTION.Paths[Ausgabe der OLE DB-Quelle]"
+                  endId="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  name="Ausgabe der OLE DB-Quelle"
+                  startId="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1.Outputs[Ausgabe der OLE DB-Quelle]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Foreach-Schleifencontainer\WP_KPIS"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Datenflusstask"
+          DTS:Disabled="True"
           DTS:DTSID="{f89f19f9-db3b-484e-87c5-cee7b9319962}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
@@ -616,7 +2264,7 @@ and WP_CODE = ?
      [time_stamp] AS UNIX_TS
 	  ,park as windpark
       ,SUM([actual_power_kw]) AS [actual_power_kw]
-	  ,SUM([actual_power_kw]) - SUM([theoretical_power]) AS [actual_power_loss]
+	  ,SUM( [power_loss_kw] ) AS [actual_power_loss]
 
   FROM [T-SDS-DB01].[dbo].[Facts_600sec_Delta]
   GROUP BY [time_stamp] , park
@@ -1627,32 +3275,15 @@ where [refTable].[WP_M_TXT] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Task &quot;SQL ausführen&quot;"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Task &quot;SQL ausführen&quot;"
-      DTS:DTSID="{C4FB03A3-547E-4B7C-90D5-B667BA92EE28}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Task &quot;SQL ausführen&quot;"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{3b228717-13f4-46e7-9cab-dba99d98c8f9}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE T_TORNADO_TOTAL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Task &quot;SQL ausführen&quot; 1"
+      DTS:refId="Package\select windpark"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Task &quot;SQL ausführen&quot;"
       DTS:DTSID="{9f6030b5-2fe9-460c-98e1-cf26ddba678c}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Task &quot;SQL ausführen&quot; 1"
+      DTS:ObjectName="select windpark"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1666,9 +3297,28 @@ where [refTable].[WP_M_TXT] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Task &quot;SQL ausführen&quot;"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Task &quot;SQL ausführen&quot;"
+      DTS:Disabled="True"
+      DTS:DTSID="{C4FB03A3-547E-4B7C-90D5-B667BA92EE28}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Task &quot;SQL ausführen&quot;"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3b228717-13f4-46e7-9cab-dba99d98c8f9}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE T_TORNADO_TOTAL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\TORNADO"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Datenflusstask"
+      DTS:Disabled="True"
       DTS:DTSID="{db69061d-39a4-446a-bcdb-26d388480e08}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -4338,7 +5988,7 @@ where [refTable].[WP_M_TXT] = ?</property>
       DTS:refId="Package.PrecedenceConstraints[Einschränkung 1]"
       DTS:CreationName=""
       DTS:DTSID="{05549E44-0FAF-46E4-92CB-33D240E50AE5}"
-      DTS:From="Package\Task &quot;SQL ausführen&quot; 1"
+      DTS:From="Package\select windpark"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Einschränkung 1"
       DTS:To="Package\Foreach-Schleifencontainer" />
@@ -4356,29 +6006,56 @@ where [refTable].[WP_M_TXT] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="114,42"
-          Id="Package\TOTAL"
-          TopLeft="120,128" />
+          Size="128,41.6"
+          Id="Package\Foreach-Schleifencontainer\WP_KPIS"
+          TopLeft="29,44" />
         <NodeLayout
-          Size="153,42"
+          Size="152.8,41.6"
+          Id="Package\Foreach-Schleifencontainer\PRODUCTION"
+          TopLeft="184.2,45.6" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP"
+          TopLeft="39.1999999999999,136" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Foreach-Schleifencontainer\WINDDIRECTION"
+          TopLeft="202.4,139.2" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="364,242.4"
+          Size="364,285.6"
+          Id="Package\Foreach-Schleifencontainer"
+          TopLeft="739.4,199" />
+        <NodeLayout
+          Size="152.8,41.6"
           Id="Package\PRODUCTION"
           TopLeft="106,220" />
         <NodeLayout
-          Size="132,42"
+          Size="132,41.6"
           Id="Package\REVENUE"
           TopLeft="105,311" />
         <NodeLayout
-          Size="135,42"
+          Size="187.2,41.6"
+          Id="Package\Task &quot;SQL ausführen&quot;"
+          TopLeft="472,134" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\select windpark"
+          TopLeft="846.6,70.4" />
+        <NodeLayout
+          Size="135.2,41.6"
           Id="Package\TORNADO"
           TopLeft="493,270" />
         <NodeLayout
-          Size="134,42"
+          Size="134.4,41.6"
           Id="Package\TORNADO 1"
           TopLeft="105,414" />
         <NodeLayout
-          Size="187,42"
-          Id="Package\Task &quot;SQL ausführen&quot;"
-          TopLeft="472,134" />
+          Size="113.6,41.6"
+          Id="Package\TOTAL"
+          TopLeft="120,128" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung]"
           TopLeft="563,176">
@@ -4401,35 +6078,20 @@ where [refTable].[WP_M_TXT] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="187,42"
-          Id="Package\Task &quot;SQL ausführen&quot; 1"
-          TopLeft="853,116" />
-        <NodeLayout
-          Size="128,42"
-          Id="Package\Foreach-Schleifencontainer\WP_KPIS"
-          TopLeft="29,44" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="364,157"
-          Size="364,200"
-          Id="Package\Foreach-Schleifencontainer"
-          TopLeft="765,211" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 1]"
-          TopLeft="946.75,158">
+          TopLeft="918.8,112">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,53"
+              EndConnector="0,87"
               Start="0,0"
-              End="0,45.5">
+              End="0,79.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.5" />
+                    End="0,79.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4442,20 +6104,20 @@ where [refTable].[WP_M_TXT] = ?</property>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\TOTAL">
+    design-time-name="Package\Foreach-Schleifencontainer\WP_KPIS">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="141,42"
-          Id="Package\TOTAL\OLE DB-Ziel"
+          Size="140.8,41.6"
+          Id="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Ziel"
           TopLeft="286,362" />
         <NodeLayout
-          Size="155,42"
-          Id="Package\TOTAL\OLE DB-Quelle"
+          Size="155.2,41.6"
+          Id="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Quelle"
           TopLeft="278,85" />
         <EdgeLayout
-          Id="Package\TOTAL.Paths[Ausgabe der OLE DB-Quelle]"
+          Id="Package\Foreach-Schleifencontainer\WP_KPIS.Paths[Ausgabe der OLE DB-Quelle]"
           TopLeft="356,127">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -4480,28 +6142,18 @@ where [refTable].[WP_M_TXT] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\TOTAL\OLE DB-Quelle">
+    design-time-name="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Quelle">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\TOTAL\OLE DB-Ziel">
+    design-time-name="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -4511,51 +6163,17 @@ where [refTable].[WP_M_TXT] = ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="155,42"
+          Size="110.4,41.6"
+          Id="Package\PRODUCTION\Suche"
+          TopLeft="131,145" />
+        <NodeLayout
+          Size="155.2,41.6"
           Id="Package\PRODUCTION\OLE DB-Quelle"
           TopLeft="4.5,6.5" />
         <NodeLayout
-          Size="148,42"
+          Size="148,41.6"
           Id="Package\PRODUCTION\OLE DB-Ziel"
           TopLeft="6,267" />
-        <NodeLayout
-          Size="110,42"
-          Id="Package\PRODUCTION\Suche"
-          TopLeft="131,145" />
-        <EdgeLayout
-          Id="Package\PRODUCTION.Paths[Ausgabe der OLE DB-Quelle]"
-          TopLeft="82,48.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="104,96.5"
-              Start="0,0"
-              End="104,89">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,44.25"
-                    Point2="0,48.25"
-                    Point3="4,48.25" />
-                  <mssgle:LineSegment
-                    End="100,48.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="100,48.25"
-                    Point2="104,48.25"
-                    Point3="104,52.25" />
-                  <mssgle:LineSegment
-                    End="104,89" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\PRODUCTION.Paths[Ausgabe der Suchübereinstimmungen]"
           TopLeft="186,187">
@@ -4592,72 +6210,8 @@ where [refTable].[WP_M_TXT] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\PRODUCTION\OLE DB-Quelle">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\PRODUCTION\OLE DB-Ziel">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\PRODUCTION\Suche">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[C_DV_WINDPARK_E]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\REVENUE">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="110,42"
-          Id="Package\REVENUE\Suche"
-          TopLeft="131,145" />
-        <NodeLayout
-          Size="155,42"
-          Id="Package\REVENUE\OLE DB-Quelle"
-          TopLeft="4.5,6.5" />
-        <NodeLayout
-          Size="148,42"
-          Id="Package\REVENUE\OLE DB-Ziel"
-          TopLeft="6,267" />
         <EdgeLayout
-          Id="Package\REVENUE.Paths[Ausgabe der OLE DB-Quelle]"
+          Id="Package\PRODUCTION.Paths[Ausgabe der OLE DB-Quelle]"
           TopLeft="82,48.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -4690,6 +6244,70 @@ where [refTable].[WP_M_TXT] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\PRODUCTION\Suche">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[C_DV_WINDPARK_E]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PRODUCTION\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PRODUCTION\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\REVENUE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="110.4,41.6"
+          Id="Package\REVENUE\Suche"
+          TopLeft="131,145" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\REVENUE\OLE DB-Quelle"
+          TopLeft="4.5,6.5" />
+        <NodeLayout
+          Size="148,41.6"
+          Id="Package\REVENUE\OLE DB-Ziel"
+          TopLeft="6,267" />
         <EdgeLayout
           Id="Package\REVENUE.Paths[Ausgabe der Suchübereinstimmungen]"
           TopLeft="186,187">
@@ -4726,6 +6344,40 @@ where [refTable].[WP_M_TXT] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\REVENUE.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="82,48.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104,96.5"
+              Start="0,0"
+              End="104,89">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.25"
+                    Point2="0,48.25"
+                    Point3="4,48.25" />
+                  <mssgle:LineSegment
+                    End="100,48.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="100,48.25"
+                    Point2="104,48.25"
+                    Point3="104,52.25" />
+                  <mssgle:LineSegment
+                    End="104,89" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -4756,17 +6408,61 @@ where [refTable].[WP_M_TXT] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="155,42"
-          Id="Package\TORNADO\LKP WP CODE 1"
-          TopLeft="218.5,133" />
-        <NodeLayout
-          Size="155,42"
+          Size="155.2,41.6"
           Id="Package\TORNADO\SELECT 1"
           TopLeft="218.5,4.5" />
         <NodeLayout
-          Size="149,42"
+          Size="148.8,41.6"
           Id="Package\TORNADO\AGGREGATE"
           TopLeft="508,97" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\TORNADO\LKP WP CODE 1"
+          TopLeft="218.5,133" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\TORNADO\OLE DB-Ziel"
+          TopLeft="338,302" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\TORNADO\Abgeleitete Spalte"
+          TopLeft="514,206" />
+        <EdgeLayout
+          Id="Package\TORNADO.Paths[Ausgabe der Suchübereinstimmungen]"
+          TopLeft="271.5,175">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="137,127"
+              Start="0,0"
+              End="137,119.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5785440613027" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47.5785440613027"
+                    Point2="0,51.5785440613027"
+                    Point3="4,51.5785440613027" />
+                  <mssgle:LineSegment
+                    End="133,51.5785440613027" />
+                  <mssgle:CubicBezierSegment
+                    Point1="133,51.5785440613027"
+                    Point2="137,51.5785440613027"
+                    Point3="137,55.5785440613027" />
+                  <mssgle:LineSegment
+                    End="137,119.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.77,56.5785440613027,168.54,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\TORNADO.Paths[Ausgabe der OLE DB-Quelle]"
           TopLeft="296,46.5">
@@ -4793,44 +6489,6 @@ where [refTable].[WP_M_TXT] = ?</property>
                     Point3="286.5,29.25" />
                   <mssgle:LineSegment
                     End="286.5,43" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="168,42"
-          Id="Package\TORNADO\Abgeleitete Spalte"
-          TopLeft="514,206" />
-        <EdgeLayout
-          Id="Package\TORNADO.Paths[Ausgabe des Aggregats 1]"
-          TopLeft="582.5,139">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="15.5,67"
-              Start="0,0"
-              End="15.5,59.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.5"
-                    Point2="0,33.5"
-                    Point3="4,33.5" />
-                  <mssgle:LineSegment
-                    End="11.5,33.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="11.5,33.5"
-                    Point2="15.5,33.5"
-                    Point3="15.5,37.5" />
-                  <mssgle:LineSegment
-                    End="15.5,59.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4873,56 +6531,71 @@ where [refTable].[WP_M_TXT] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="141,42"
-          Id="Package\TORNADO\OLE DB-Ziel"
-          TopLeft="338,302" />
         <EdgeLayout
-          Id="Package\TORNADO.Paths[Ausgabe der Suchübereinstimmungen]"
-          TopLeft="271.5,175">
+          Id="Package\TORNADO.Paths[Ausgabe des Aggregats 1]"
+          TopLeft="582.5,139">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="137,127"
+              EndConnector="15.5,67"
               Start="0,0"
-              End="137,119.5">
+              End="15.5,59.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,47.5785440613027" />
+                    End="0,29.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,47.5785440613027"
-                    Point2="0,51.5785440613027"
-                    Point3="4,51.5785440613027" />
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="4,33.5" />
                   <mssgle:LineSegment
-                    End="133,51.5785440613027" />
+                    End="11.5,33.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="133,51.5785440613027"
-                    Point2="137,51.5785440613027"
-                    Point3="137,55.5785440613027" />
+                    Point1="11.5,33.5"
+                    Point2="15.5,33.5"
+                    Point3="15.5,37.5" />
                   <mssgle:LineSegment
-                    End="137,119.5" />
+                    End="15.5,59.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-15.77,56.5785440613027,168.54,11.6630859375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\TORNADO\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\TORNADO\SELECT 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\TORNADO\LKP WP CODE 1">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -4932,16 +6605,8 @@ where [refTable].[WP_M_TXT] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\TORNADO\SELECT 1">
-    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -4954,49 +6619,49 @@ where [refTable].[WP_M_TXT] = ?</property>
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="155,42"
-          Id="Package\TORNADO 1\SELECT 1"
-          TopLeft="218.5,6.5" />
-        <NodeLayout
-          Size="155,42"
           Id="Package\TORNADO 1\OLE DB-Ziel 1"
           TopLeft="218.5,267" />
-        <NodeLayout
-          Size="155,42"
-          Id="Package\TORNADO 1\OLE DB-Ziel"
-          TopLeft="3.5,267" />
         <NodeLayout
           Size="155,42"
           Id="Package\TORNADO 1\LKP WP CODE 1"
           TopLeft="218.5,133" />
         <NodeLayout
           Size="155,42"
+          Id="Package\TORNADO 1\SELECT"
+          TopLeft="3.5,6.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\TORNADO 1\SELECT 1"
+          TopLeft="218.5,6.5" />
+        <NodeLayout
+          Size="155,42"
           Id="Package\TORNADO 1\LKP WP CODE"
           TopLeft="3.5,133" />
         <NodeLayout
           Size="155,42"
-          Id="Package\TORNADO 1\SELECT"
-          TopLeft="3.5,6.5" />
+          Id="Package\TORNADO 1\OLE DB-Ziel"
+          TopLeft="3.5,267" />
         <EdgeLayout
-          Id="Package\TORNADO 1.Paths[Ausgabe der OLE DB-Quelle]"
-          TopLeft="81,48.5">
+          Id="Package\TORNADO 1.Paths[Ausgabe der Suchübereinstimmungen1]"
+          TopLeft="296,175">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,84.5"
+              EndConnector="0,92"
               Start="0,0"
-              End="0,77">
+              End="0,84.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,77" />
+                    End="0,84.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-84.27,36.41845703125,168.54,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -5049,60 +6714,47 @@ where [refTable].[WP_M_TXT] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\TORNADO 1.Paths[Ausgabe der Suchübereinstimmungen1]"
-          TopLeft="296,175">
+          Id="Package\TORNADO 1.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="81,48.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,92"
+              EndConnector="0,84.5"
               Start="0,0"
-              End="0,84.5">
+              End="0,77">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,84.5" />
+                    End="0,77" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-84.27,36.41845703125,168.54,11.6630859375"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\TORNADO\OLE DB-Ziel">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\Foreach-Schleifencontainer\WP_KPIS">
+    design-time-name="Package\TOTAL">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Quelle"
-          TopLeft="278,85" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="141,42"
-          Id="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Ziel"
+          Id="Package\TOTAL\OLE DB-Ziel"
           TopLeft="286,362" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\TOTAL\OLE DB-Quelle"
+          TopLeft="278,85" />
         <EdgeLayout
-          Id="Package\Foreach-Schleifencontainer\WP_KPIS.Paths[Ausgabe der OLE DB-Quelle]"
+          Id="Package\TOTAL.Paths[Ausgabe der OLE DB-Quelle]"
           TopLeft="356,127">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5120,6 +6772,72 @@ where [refTable].[WP_M_TXT] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\TOTAL\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\TOTAL\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach-Schleifencontainer\PRODUCTION">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle"
+          TopLeft="4.5,6.5" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel"
+          TopLeft="1.4210854715202E-14,176" />
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer\PRODUCTION.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="80.85,48.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,127.9"
+              Start="0,0"
+              End="0,120.4">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,120.4" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -5127,7 +6845,7 @@ where [refTable].[WP_M_TXT] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Quelle">
+    design-time-name="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Quelle">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5135,7 +6853,191 @@ where [refTable].[WP_M_TXT] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\WP_KPIS\OLE DB-Ziel">
+    design-time-name="Package\Foreach-Schleifencontainer\PRODUCTION\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach-Schleifencontainer\TORNADO WP">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP\AGGREGATE"
+          TopLeft="508,97" />
+        <NodeLayout
+          Size="140.8,41.6"
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel"
+          TopLeft="338,302" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1"
+          TopLeft="509.7,15.7" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP\Abgeleitete Spalte"
+          TopLeft="514,206" />
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="584.85,57.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.7"
+              Start="0,0"
+              End="0,32.2">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.2" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP.Paths[Ausgabe des Aggregats 1]"
+          TopLeft="582.5,139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.5,67"
+              Start="0,0"
+              End="15.5,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="4,33.5" />
+                  <mssgle:LineSegment
+                    End="11.5,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.5,33.5"
+                    Point2="15.5,33.5"
+                    Point3="15.5,37.5" />
+                  <mssgle:LineSegment
+                    End="15.5,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer\TORNADO WP.Paths[Ausgabe der abgeleiteten Spalte]"
+          TopLeft="598,247.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-189.6,54.4"
+              Start="0,0"
+              End="-189.6,46.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.2"
+                    Point2="0,27.2"
+                    Point3="-4,27.2" />
+                  <mssgle:LineSegment
+                    End="-185.6,27.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-185.6,27.2"
+                    Point2="-189.6,27.2"
+                    Point3="-189.6,31.2" />
+                  <mssgle:LineSegment
+                    End="-189.6,46.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer\TORNADO WP\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer\TORNADO WP\SELECT 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach-Schleifencontainer\WINDDIRECTION">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1"
+          TopLeft="249.7,22.1" />
+        <NodeLayout
+          Size="128,41.6"
+          Id="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel"
+          TopLeft="267.2,140.8" />
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer\WINDDIRECTION.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="329.25,63.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,77.1"
+              Start="0,0"
+              End="0,69.6">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.6" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer\WINDDIRECTION\SELECT 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer\WINDDIRECTION\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

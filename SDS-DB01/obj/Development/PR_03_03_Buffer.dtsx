@@ -11,8 +11,8 @@
   DTS:LocaleID="2055"
   DTS:ObjectName="PR_03_03_Buffer"
   DTS:PackageType="5"
-  DTS:VersionBuild="89"
-  DTS:VersionGUID="{D3EA08D9-E10D-48D9-9E95-7C910EE1D183}">
+  DTS:VersionBuild="107"
+  DTS:VersionGUID="{9334B77D-E9BF-402C-8996-125EC4C32BEA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -60,6 +60,17 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{EC9B599B-58C0-4A27-A5B3-6D35B6A9774E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;FCT_LOAD_CLASS_&quot; +  (DT_WSTR, 20 )    @[User::turbine]     + &quot;_&quot;  + (DT_WSTR, 6 ) @[User::period]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="tn_load_class_trubine">
+      <DTS:VariableValue
+        DTS:DataType="8">FCT_LOAD_CLASS__0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{B870CA91-DE8F-4371-A21B-0C3D3A0DBD73}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="&quot;FCT_LOAD_CLASS_&quot; +  @[User::windpark]  + &quot;_&quot;  + (DT_WSTR, 6 ) @[User::period]"
@@ -68,6 +79,17 @@
       DTS:ObjectName="tn_load_class_wp">
       <DTS:VariableValue
         DTS:DataType="8">FCT_LOAD_CLASS__0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F734923F-D217-47AC-9D37-40490157F36E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;FCT_STATUS_&quot; +  (DT_WSTR, 20 )    @[User::turbine]     + &quot;_&quot;  + (DT_WSTR, 6 ) @[User::period]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="tn_status_turbine">
+      <DTS:VariableValue
+        DTS:DataType="8">FCT_STATUS__0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -90,6 +112,17 @@
       DTS:ObjectName="tn_theoretical_power_total_">
       <DTS:VariableValue
         DTS:DataType="8">FCT_THEORETICAL_POWER_TOTAL_0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{623C0AA5-A8BC-4B24-9A87-FFE20EC31C36}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;FCT_THEORETICAL_POWER_&quot; +  (DT_WSTR, 20 )    @[User::turbine]     + &quot;_&quot;  + (DT_WSTR, 6 ) @[User::period]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="tn_theoretical_power_turbine">
+      <DTS:VariableValue
+        DTS:DataType="8">FCT_THEORETICAL_POWER__0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -164,7 +197,6 @@
       DTS:refId="Package\ACTUAL_POWER"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Datenflusstask"
-      DTS:Disabled="True"
       DTS:DTSID="{A3C2C3B1-B0E9-40BD-AEC1-19EAF8EA177E}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -458,7 +490,6 @@ SELECT
       DTS:refId="Package\Foreach-Schleifencontainer"
       DTS:CreationName="STOCK:FOREACHLOOP"
       DTS:Description="Foreach-Schleifencontainer"
-      DTS:Disabled="True"
       DTS:DTSID="{A87CC3DD-EC0A-4E58-865E-573CEDF5E0C4}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
@@ -2112,6 +2143,881 @@ SELECT
             </pipeline>
           </DTS:ObjectData>
         </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Datenflusstask"
+          DTS:DTSID="{27e27311-357a-4472-ae48-d18d8fd724bb}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="LOAD CLASS"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB-Quelle"
+                  name="OLE DB-Quelle"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+       [TS_UNIX] AS UNIX_TS
+      ,SUM( LOAD_CLASS ) AS VALUE
+
+  FROM  [T-SDS-DB00].[dbo].[META_TIME_SERIE]
+  LEFT JOIN ( select  [time_stamp], LOAD_CLASS from [T-SDS-DB01].[dbo].[Facts_600sec_Delta] 
+   where  turbine_serial =  convert(bigint,   ?  )  )x 
+  ON [time_stamp] = [TS_UNIX]
+
+  WHERE [PERIOD] = ?
+  GROUP BY [TS_UNIX]
+  ORDER BY 1</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                      name="ParameterMapping">"00001:Input",{01019D7B-99E6-4167-ABDF-4677A70C6CFF};"00002:Input",{F15AE19B-4996-4316-955F-5E77341183EA};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Connections[OleDbConnection]"
+                      connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                      name="Ausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[VALUE]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          name="VALUE"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          dataType="i8"
+                          name="UNIX_TS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[VALUE]"
+                          dataType="numeric"
+                          name="VALUE"
+                          precision="38"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                      isErrorOut="true"
+                      name="Fehlerausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          name="VALUE"
+                          precision="38"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB-Ziel"
+                  name="OLE DB-Ziel"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset">[OLE DB-Ziel]</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable">User::tn_load_class_trubine</property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">4</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Connections[OleDbConnection]"
+                      connectionManagerID="{7f3fb50c-c552-48c9-8705-2ab08ca0a135}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB04]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                      errorOrTruncationOperation="Einfügen"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Eingabe des OLE DB-Ziels">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[UNIX_TS]"
+                          cachedDataType="i8"
+                          cachedName="UNIX_TS"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIXTS]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[VALUE]"
+                          cachedDataType="numeric"
+                          cachedName="VALUE"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[VALUE]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIXTS]"
+                          dataType="i8"
+                          name="UNIXTS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[VALUE]"
+                          dataType="numeric"
+                          name="VALUE"
+                          precision="38"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Fehlerausgabe des OLE DB-Ziels"
+                      synchronousInputId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach-Schleifencontainer 1\LOAD CLASS.Paths[Ausgabe der OLE DB-Quelle]"
+                  endId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  name="Ausgabe der OLE DB-Quelle"
+                  startId="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach-Schleifencontainer 1\STATUS"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Datenflusstask"
+          DTS:DTSID="{ce2d5b46-7c87-4da0-a869-c3594d041c39}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="STATUS"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB-Quelle"
+                  name="OLE DB-Quelle"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+       [TS_UNIX] AS UNIX_TS
+      ,SUM(STATUSCODE) AS VALUE
+
+  FROM  [T-SDS-DB00].[dbo].[META_TIME_SERIE]
+  LEFT JOIN ( select  [time_stamp], STATUSCODE from [T-SDS-DB01].[dbo].[Facts_600sec_Delta] 
+   where  turbine_serial =  convert(bigint,   ?  )  )x 
+  ON [time_stamp] = [TS_UNIX]
+
+  WHERE [PERIOD] = ?
+  GROUP BY [TS_UNIX]
+  ORDER BY 1</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                      name="ParameterMapping">"00001:Input",{01019D7B-99E6-4167-ABDF-4677A70C6CFF};"00002:Input",{F15AE19B-4996-4316-955F-5E77341183EA};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Connections[OleDbConnection]"
+                      connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                      name="Ausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[VALUE]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          name="VALUE"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          dataType="i8"
+                          name="UNIX_TS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[VALUE]"
+                          dataType="i4"
+                          name="VALUE" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                      isErrorOut="true"
+                      name="Fehlerausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          name="VALUE" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB-Ziel"
+                  name="OLE DB-Ziel"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset">[OLE DB-Ziel]</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable">User::tn_status_turbine</property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">4</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Connections[OleDbConnection]"
+                      connectionManagerID="{7f3fb50c-c552-48c9-8705-2ab08ca0a135}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB04]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                      errorOrTruncationOperation="Einfügen"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Eingabe des OLE DB-Ziels">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[UNIX_TS]"
+                          cachedDataType="i8"
+                          cachedName="UNIX_TS"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIXTS]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[VALUE]"
+                          cachedDataType="numeric"
+                          cachedName="VALUE"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[VALUE]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIXTS]"
+                          dataType="i8"
+                          name="UNIXTS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[VALUE]"
+                          dataType="numeric"
+                          name="VALUE"
+                          precision="38"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Fehlerausgabe des OLE DB-Ziels"
+                      synchronousInputId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach-Schleifencontainer 1\STATUS.Paths[Ausgabe der OLE DB-Quelle]"
+                  endId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  name="Ausgabe der OLE DB-Quelle"
+                  startId="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Datenflusstask"
+          DTS:DTSID="{a4b2fff3-e687-434f-88e3-a6fe200bedd6}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="THEORETICAL_POWER 1"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB-Quelle"
+                  name="OLE DB-Quelle"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+       [TS_UNIX] AS UNIX_TS
+      ,SUM(theoretical_power) AS VALUE
+
+  FROM  [T-SDS-DB00].[dbo].[META_TIME_SERIE]
+  LEFT JOIN ( select  [time_stamp], theoretical_power from [T-SDS-DB01].[dbo].[Facts_600sec_Delta] 
+   where  turbine_serial =  convert(bigint,   ?  )  )x 
+  ON [time_stamp] = [TS_UNIX]
+
+  WHERE [PERIOD] = ?
+  GROUP BY [TS_UNIX]
+  ORDER BY 1</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                      name="ParameterMapping">"00001:Input",{01019D7B-99E6-4167-ABDF-4677A70C6CFF};"00002:Input",{F15AE19B-4996-4316-955F-5E77341183EA};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Connections[OleDbConnection]"
+                      connectionManagerID="{a4ab0129-ab0b-4a88-ada6-f313d82c7a18}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB01]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]"
+                      name="Ausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Konvertierung"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[VALUE]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          name="VALUE"
+                          precision="38"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[UNIX_TS]"
+                          dataType="i8"
+                          name="UNIX_TS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[VALUE]"
+                          dataType="numeric"
+                          name="VALUE"
+                          precision="38"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                      isErrorOut="true"
+                      name="Fehlerausgabe der OLE DB-Quelle">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          dataType="i8"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[UNIX_TS]"
+                          name="UNIX_TS" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[VALUE]"
+                          name="VALUE"
+                          precision="38"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB-Ziel"
+                  name="OLE DB-Ziel"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                      name="OpenRowset">[OLE DB-Ziel]</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                      name="OpenRowsetVariable">User::tn_theoretical_power_turbine</property>
+                    <property
+                      dataType="System.String"
+                      description="Der auszuführende SQL-Befehl."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                      name="AccessMode"
+                      typeConverter="AccessMode">4</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Connections[OleDbConnection]"
+                      connectionManagerID="{7f3fb50c-c552-48c9-8705-2ab08ca0a135}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[DB04]"
+                      description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                      errorOrTruncationOperation="Einfügen"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Eingabe des OLE DB-Ziels">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[UNIX_TS]"
+                          cachedDataType="i8"
+                          cachedName="UNIX_TS"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIXTS]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[UNIX_TS]" />
+                        <inputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[VALUE]"
+                          cachedDataType="numeric"
+                          cachedName="VALUE"
+                          cachedPrecision="38"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[VALUE]"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle].Columns[VALUE]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[UNIXTS]"
+                          dataType="i8"
+                          name="UNIXTS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[VALUE]"
+                          dataType="numeric"
+                          name="VALUE"
+                          precision="38"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Fehlerausgabe des OLE DB-Ziels"
+                      synchronousInputId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1.Paths[Ausgabe der OLE DB-Quelle]"
+                  endId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  name="Ausgabe der OLE DB-Quelle"
+                  startId="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle.Outputs[Ausgabe der OLE DB-Quelle]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
       </DTS:Executables>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -2148,7 +3054,6 @@ SELECT
       DTS:refId="Package\THEORETICAL_POWER"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Datenflusstask"
-      DTS:Disabled="True"
       DTS:DTSID="{01940962-f1fc-4786-a088-57c715d13433}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -2546,13 +3451,71 @@ SELECT
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="170,42"
+          Size="169.6,41.6"
           Id="Package\ACTUAL_POWER"
           TopLeft="149,248" />
         <NodeLayout
-          Size="187,42"
+          Size="169.6,41.6"
+          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER"
+          TopLeft="37,143" />
+        <NodeLayout
+          Size="148,41.6"
+          Id="Package\Foreach-Schleifencontainer\LOAD CLASS"
+          TopLeft="212,38" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Foreach-Schleifencontainer\STATUS"
+          TopLeft="37,41" />
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\Foreach-Schleifencontainer\THEORETICAL_POWER"
+          TopLeft="227,138" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="448.8,342.4"
+          Size="448.8,384.8"
+          Id="Package\Foreach-Schleifencontainer"
+          TopLeft="641,255" />
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\ACTUAL_POWER"
+          TopLeft="32,28" />
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1"
+          TopLeft="32.8,105.6" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\STATUS"
+          TopLeft="36.8,180.8" />
+        <NodeLayout
+          Size="133.6,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\LOAD CLASS"
+          TopLeft="38.4000000000001,256.8" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="246.4,379.2"
+          Size="246.4,422.4"
+          Id="Package\Foreach-Schleifencontainer 1"
+          TopLeft="1136.8,233.8" />
+        <NodeLayout
+          Size="187.2,41.6"
           Id="Package\Task &quot;SQL ausführen&quot;"
           TopLeft="240,115" />
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\THEORETICAL_POWER"
+          TopLeft="337,248" />
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\Turbine List"
+          TopLeft="1250.6,115.4" />
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\Windpark List"
+          TopLeft="790,120" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung]"
           TopLeft="303.666666666667,157">
@@ -2587,10 +3550,6 @@ SELECT
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="204,42"
-          Id="Package\THEORETICAL_POWER"
-          TopLeft="337,248" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 1]"
           TopLeft="363.333333333333,157">
@@ -2625,10 +3584,6 @@ SELECT
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="146,42"
-          Id="Package\Windpark List"
-          TopLeft="790,120" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 2]"
           TopLeft="427,138.5">
@@ -2651,29 +3606,6 @@ SELECT
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="122,42"
-          Id="Package\Foreach-Schleifencontainer\STATUS"
-          TopLeft="37,41" />
-        <NodeLayout
-          Size="148,42"
-          Id="Package\Foreach-Schleifencontainer\LOAD CLASS"
-          TopLeft="212,38" />
-        <NodeLayout
-          Size="170,42"
-          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER"
-          TopLeft="37,143" />
-        <NodeLayout
-          Size="204,42"
-          Id="Package\Foreach-Schleifencontainer\THEORETICAL_POWER"
-          TopLeft="227,138" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="449,342"
-          Size="449,385"
-          Id="Package\Foreach-Schleifencontainer"
-          TopLeft="641,255" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 3]"
           TopLeft="864.25,162">
@@ -2696,47 +3628,32 @@ SELECT
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="136,42"
-          Id="Package\Turbine List"
-          TopLeft="1205,117" />
-        <NodeLayout
-          Size="170,42"
-          Id="Package\Foreach-Schleifencontainer 1\ACTUAL_POWER"
-          TopLeft="32,28" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="235,157"
-          Size="235,200"
-          Id="Package\Foreach-Schleifencontainer 1"
-          TopLeft="1188,249" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 4]"
-          TopLeft="1273,159">
+          TopLeft="1318.6,157">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="32.5,90"
+              EndConnector="-58.6000000000001,76.8"
               Start="0,0"
-              End="32.5,82.5">
+              End="-58.6000000000001,69.3">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,41" />
+                    End="0,34.4" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,41"
-                    Point2="0,45"
-                    Point3="4,45" />
+                    Point1="0,34.4"
+                    Point2="0,38.4"
+                    Point3="-4,38.4" />
                   <mssgle:LineSegment
-                    End="28.5,45" />
+                    End="-54.6000000000001,38.4" />
                   <mssgle:CubicBezierSegment
-                    Point1="28.5,45"
-                    Point2="32.5,45"
-                    Point3="32.5,49" />
+                    Point1="-54.6000000000001,38.4"
+                    Point2="-58.6000000000001,38.4"
+                    Point3="-58.6000000000001,42.4" />
                   <mssgle:LineSegment
-                    End="32.5,82.5" />
+                    End="-58.6000000000001,69.3" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2747,18 +3664,18 @@ SELECT
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 5]"
-          TopLeft="936,139.5">
+          TopLeft="935.6,138.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="269,0"
+              EndConnector="315,0"
               Start="0,0"
-              End="261.5,0">
+              End="307.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="261.5,0" />
+                    End="307.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2774,15 +3691,15 @@ SELECT
     design-time-name="Package\ACTUAL_POWER">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="155,42"
-          Id="Package\ACTUAL_POWER\OLE DB-Quelle"
-          TopLeft="206,123" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="162,42"
           Id="Package\ACTUAL_POWER\OLE DB-Ziel"
           TopLeft="202,346" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\ACTUAL_POWER\OLE DB-Quelle"
+          TopLeft="206,123" />
         <EdgeLayout
           Id="Package\ACTUAL_POWER.Paths[Ausgabe der OLE DB-Quelle]"
           TopLeft="283.25,165">
@@ -2802,7 +3719,9 @@ SELECT
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2835,45 +3754,47 @@ SELECT
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\THEORETICAL_POWER">
+    design-time-name="Package\Foreach-Schleifencontainer\ACTUAL_POWER">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="162,42"
-          Id="Package\THEORETICAL_POWER\OLE DB-Ziel"
-          TopLeft="202,346" />
+          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Ziel"
+          TopLeft="202,343" />
         <NodeLayout
           Size="155,42"
-          Id="Package\THEORETICAL_POWER\OLE DB-Quelle"
+          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Quelle"
           TopLeft="206,123" />
         <EdgeLayout
-          Id="Package\THEORETICAL_POWER.Paths[Ausgabe der OLE DB-Quelle]"
+          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER.Paths[Ausgabe der OLE DB-Quelle]"
           TopLeft="283.25,165">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,181"
+              EndConnector="0,178"
               Start="0,0"
-              End="0,173.5">
+              End="0,170.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,173.5" />
+                    End="0,170.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\THEORETICAL_POWER\OLE DB-Ziel">
+    design-time-name="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Quelle">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2881,7 +3802,91 @@ SELECT
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\THEORETICAL_POWER\OLE DB-Quelle">
+    design-time-name="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach-Schleifencontainer\LOAD CLASS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Quelle"
+          TopLeft="202,123" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Foreach-Schleifencontainer\LOAD CLASS\Abgeleitete Spalte"
+          TopLeft="202,235" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Ziel"
+          TopLeft="202,346" />
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer\LOAD CLASS.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="286,165">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70"
+              Start="0,0"
+              End="0,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer\LOAD CLASS.Paths[Ausgabe der abgeleiteten Spalte]"
+          TopLeft="286,277">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2892,11 +3897,7 @@ SELECT
     design-time-name="Package\Foreach-Schleifencontainer\STATUS">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="162,42"
-          Id="Package\Foreach-Schleifencontainer\STATUS\OLE DB-Ziel"
-          TopLeft="202,346" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="155,42"
           Id="Package\Foreach-Schleifencontainer\STATUS\OLE DB-Quelle"
@@ -2905,6 +3906,10 @@ SELECT
           Size="168,42"
           Id="Package\Foreach-Schleifencontainer\STATUS\Abgeleitete Spalte"
           TopLeft="216,235" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Foreach-Schleifencontainer\STATUS\OLE DB-Ziel"
+          TopLeft="202,346" />
         <EdgeLayout
           Id="Package\Foreach-Schleifencontainer\STATUS.Paths[Ausgabe der OLE DB-Quelle]"
           TopLeft="283.5,165">
@@ -2936,7 +3941,9 @@ SELECT
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2970,20 +3977,14 @@ SELECT
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\STATUS\OLE DB-Ziel">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Foreach-Schleifencontainer\STATUS\OLE DB-Quelle">
     <Properties>
@@ -2992,134 +3993,8 @@ SELECT
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Foreach-Schleifencontainer\LOAD CLASS">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="168,42"
-          Id="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Ziel"
-          TopLeft="202,346" />
-        <NodeLayout
-          Size="168,42"
-          Id="Package\Foreach-Schleifencontainer\LOAD CLASS\Abgeleitete Spalte"
-          TopLeft="202,235" />
-        <NodeLayout
-          Size="168,42"
-          Id="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Quelle"
-          TopLeft="202,123" />
-        <EdgeLayout
-          Id="Package\Foreach-Schleifencontainer\LOAD CLASS.Paths[Ausgabe der abgeleiteten Spalte]"
-          TopLeft="286,277">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,69"
-              Start="0,0"
-              End="0,61.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,61.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Foreach-Schleifencontainer\LOAD CLASS.Paths[Ausgabe der OLE DB-Quelle]"
-          TopLeft="286,165">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,70"
-              Start="0,0"
-              End="0,62.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,62.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Ziel">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\LOAD CLASS\OLE DB-Quelle">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Foreach-Schleifencontainer\ACTUAL_POWER">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="162,42"
-          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Ziel"
-          TopLeft="202,343" />
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Quelle"
-          TopLeft="206,123" />
-        <EdgeLayout
-          Id="Package\Foreach-Schleifencontainer\ACTUAL_POWER.Paths[Ausgabe der OLE DB-Quelle]"
-          TopLeft="283.25,165">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,178"
-              Start="0,0"
-              End="0,170.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,170.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Ziel">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\ACTUAL_POWER\OLE DB-Quelle">
+    design-time-name="Package\Foreach-Schleifencontainer\STATUS\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3130,7 +4005,7 @@ SELECT
     design-time-name="Package\Foreach-Schleifencontainer\THEORETICAL_POWER">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="162,42"
           Id="Package\Foreach-Schleifencontainer\THEORETICAL_POWER\OLE DB-Ziel"
@@ -3158,14 +4033,16 @@ SELECT
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\THEORETICAL_POWER\OLE DB-Ziel">
+    design-time-name="Package\Foreach-Schleifencontainer\THEORETICAL_POWER\OLE DB-Quelle">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3173,7 +4050,7 @@ SELECT
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer\THEORETICAL_POWER\OLE DB-Quelle">
+    design-time-name="Package\Foreach-Schleifencontainer\THEORETICAL_POWER\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3184,7 +4061,7 @@ SELECT
     design-time-name="Package\Foreach-Schleifencontainer 1\ACTUAL_POWER">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="162,42"
           Id="Package\Foreach-Schleifencontainer 1\ACTUAL_POWER\OLE DB-Ziel"
@@ -3212,12 +4089,22 @@ SELECT
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer 1\ACTUAL_POWER\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Foreach-Schleifencontainer 1\ACTUAL_POWER\OLE DB-Ziel">
     <Properties>
@@ -3226,8 +4113,230 @@ SELECT
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\THEORETICAL_POWER">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="162,42"
+          Id="Package\THEORETICAL_POWER\OLE DB-Ziel"
+          TopLeft="202,346" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\THEORETICAL_POWER\OLE DB-Quelle"
+          TopLeft="206,123" />
+        <EdgeLayout
+          Id="Package\THEORETICAL_POWER.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="283.25,165">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,181"
+              Start="0,0"
+              End="0,173.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,173.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach-Schleifencontainer 1\ACTUAL_POWER\OLE DB-Quelle">
+    design-time-name="Package\THEORETICAL_POWER\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\THEORETICAL_POWER\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle"
+          TopLeft="206,123" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel"
+          TopLeft="215.6,260.6" />
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="283.6,164.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.8,96"
+              Start="0,0"
+              End="12.8,88.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44"
+                    Point2="0,48"
+                    Point3="4,48" />
+                  <mssgle:LineSegment
+                    End="8.80000000000001,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.80000000000001,48"
+                    Point2="12.8,48"
+                    Point3="12.8,52" />
+                  <mssgle:LineSegment
+                    End="12.8,88.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer 1\THEORETICAL_POWER 1\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach-Schleifencontainer 1\STATUS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle"
+          TopLeft="206,123" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel"
+          TopLeft="202,343" />
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer 1\STATUS.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="283.25,165">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,178"
+              Start="0,0"
+              End="0,170.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,170.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer 1\STATUS\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach-Schleifencontainer 1\LOAD CLASS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle"
+          TopLeft="206,123" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel"
+          TopLeft="202,343" />
+        <EdgeLayout
+          Id="Package\Foreach-Schleifencontainer 1\LOAD CLASS.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="283.25,165">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,178"
+              Start="0,0"
+              End="0,170.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,170.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach-Schleifencontainer 1\LOAD CLASS\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

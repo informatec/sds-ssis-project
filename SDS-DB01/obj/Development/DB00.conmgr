@@ -5,10 +5,10 @@
   DTS:CreationName="OLEDB">
   <DTS:ObjectData>
     <DTS:ConnectionManager
-      DTS:ConnectionString="Data Source=t-sds-qap-sql.umwerk.net;User ID=dbadmin;Initial Catalog=T-SDS-DB00;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      DTS:ConnectionString="Data Source=T-SDS-QAP-MSSQL;User ID=dbadmin;Initial Catalog=T-SDS-DB00;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
       <DTS:Password
         DTS:Name="Password"
-        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASFudscpOAEGIb0RP6YF5KgAAAAACAAAAAAADZgAAwAAAABAAAADoedgpEl2rADne8DUVP6LXAAAAAASAAACgAAAAEAAAAAqT5qunUj8ETTkwmCNb6r54AAAAAG2OnLYImm6C9XJTky6dysr/xmJBrnqurvwjyE4Ya9c4ssN5Z9bdfkJC5k4quEIZs5G1ODEKsXQU7QrHBXcgczAcRl+iJO6bAc1LPSCOBw988UNgtu2NmhP0QbWYS+NnSZhy6zifX113OkscF4v8zIlfu6ysEbmSFAAAACvj8bMyhT2SrdTrB4t5l5rCBKbY</DTS:Password>
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5gej6xr4FE2xSAnU4kVqgAAAAAACAAAAAAAQZgAAAAEAACAAAADG28C+fkEdnXQ0Dh73pfjKbxmEcPz7qsc8R/JB+M+4XQAAAAAOgAAAAAIAACAAAACqVNIz2xC1jBOsP0Ju1zHTH6KnUa4IYyGWM+ltXvz4r4AAAABsbQ4jq3u0+O+/X2AyJSGi/GzhG8rUwXtfbq/QQRE/icvISILaUpLBDucjb30sy9sIOvFmRVh8UBhfvpsLSkFbSV92UjLTIe5cGbo1wzYutyRILsuQkePIr/ohFYhiev6oaNHW5t3COhTbfjI/KVH+wqlYLbQC42zRhYGUBbvkCUAAAADvquPvzaLW/KeMZLBfIqHuTkwkevPuoID5ibiBW2dA+8i1A50SvgBIVF+GQ6jem57FLsMT/ZMJKPib35IIenoK</DTS:Password>
     </DTS:ConnectionManager>
   </DTS:ObjectData>
 </DTS:ConnectionManager>
